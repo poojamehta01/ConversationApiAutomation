@@ -1,2 +1,5 @@
-package com.api.automation.pojos.response;public class ConversationApiResponse {
+package com.api.automation.pojos.response;
+
+public class ConversationApiResponse {
+
 }

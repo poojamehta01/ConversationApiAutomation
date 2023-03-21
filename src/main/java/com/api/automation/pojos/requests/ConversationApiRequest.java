@@ -1,2 +1,5 @@
-package com.api.automation.pojos.requests;public class ConversationApiRequest {
+package com.api.automation.pojos.requests;
+
+public class ConversationApiRequest {
+
 }
