@@ -17,9 +17,9 @@ public class ConversationApiTests {
 
   public void createConversation() {
     CreateConversationRequeset createConversationRequest=null;
-    ApiRequestBuilder getUsersBuilder = ConversationApiHelper.createConversation(POST, createConversationRequest);
-    Response getUsersResponse = RestAssuredUtils.processApiRequest(getUsersBuilder);
-    CreateConversationResponse response = getUsersResponse.as(CreateConversationResponse.class);
+    ApiRequestBuilder createConversationBuilder = ConversationApiHelper.createConversation(POST,201, createConversationRequest);
+    Response createConversationResponse = RestAssuredUtils.processApiRequest(createConversationBuilder);
+    CreateConversationResponse response = createConversationResponse.as(CreateConversationResponse.class);
     System.out.println(response);
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertNotNull(response);

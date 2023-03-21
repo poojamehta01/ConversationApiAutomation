@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="19267e0d-f16f-4927-a58f-663811edb201" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/constants/ConversationApiConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/automation/constants/ConversationApiConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/helpers/ConversationApiHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/automation/helpers/ConversationApiHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/api/automation/ConversationApiTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/api/automation/ConversationApiTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
