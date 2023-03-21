@@ -12,19 +12,18 @@ import java.util.Map;
 
 public class ConversationApiHelper {
 
-  private static final String HEADER_TOKEN = null;
 
-  private static Map<String, Object> getHeaders() {
+  public static Map<String, Object> getHeaders(String jwtToken) {
     Map<String, Object> headers = new HashMap<>();
-    headers.put("Authorization", "Bearer " + HEADER_TOKEN);
+    headers.put("Authorization", "Bearer " + jwtToken);
     headers.put("Content-type", "application/json");
     return headers;
   }
-  public static ApiRequestBuilder createConversation(Method methodType,int expectedStatusCode, CreateConversationRequeset createConversationRequeset ) {
+  public static ApiRequestBuilder createConversation(Method methodType,int expectedStatusCode, CreateConversationRequeset createConversationRequeset) {
 
     return ApiRequestBuilder.builder()
         .requestMethod(methodType)
-        .requestHeaders(getHeaders())
+        .
         .requestBody(getJsonString(createConversationRequeset))
         .endPoint(BASE_URL+CONVERSATION_ENDPOINT)
         .expectedStatusCode(expectedStatusCode)

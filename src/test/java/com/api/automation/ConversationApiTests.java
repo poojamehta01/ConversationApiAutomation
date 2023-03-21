@@ -1,18 +1,28 @@
 package com.api.automation;
 
+import static com.api.automation.helpers.ConversationApiHelper.getHeaders;
 import static io.restassured.http.Method.POST;
 
 import com.api.automation.helpers.ConversationApiHelper;
+import com.api.automation.helpers.JWTTokenGenerator;
 import com.api.automation.pojos.requests.CreateConversationRequeset;
 import com.api.automation.pojos.response.CreateConversationResponse;
 import com.api.automation.utils.ApiRequestBuilder;
 import com.api.automation.utils.RestAssuredUtils;
 import io.restassured.response.Response;
+import org.junit.Before;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class ConversationApiTests extends BaseTest  {
 
+  private String jwtToken;
+
+  @Before
+  public void setup() {
+    jwtToken = JWTTokenGenerator.generateJWT();
+    getHeaders(jwtToken);
+  }
   @Test(description = "create Conversation")
 
   public void createConversation() {
