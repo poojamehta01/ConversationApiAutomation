@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="conversation suite" verbose="10">
+  <test name="conversation test" verbose="10">
+    <parameter name="groupName" value="conversationTests"/>
+    <parameter name="baseUrl" value="https://api.nexmo.com/v0.1"/>
+    <parameter name="moduleName" value="conversationModule"/>
+    <classes>
+      <class
+        name="com.api.automation.ConversationApiTests"/>
+      <class
+        name="com.api.automation.ConversationApiTests"/>
+    </classes>
+  </test>
+</suite>
