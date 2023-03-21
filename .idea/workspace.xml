@@ -5,15 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="19267e0d-f16f-4927-a58f-663811edb201" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/api/automation/helpers/ConversationApiHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/automation/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/api/automation/AppTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/pojos/requests/ConversationApiRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/automation/pojos/requests/CreateConversationRequeset.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/pojos/response/ConversationApiResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/automation/pojos/response/CreateConversationResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/api/automation/ConversationApiTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/api/automation/ConversationApiTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -65,6 +73,10 @@
       <recent name="$PROJECT_DIR$/src/main/java/com/api/automation" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.api.automation.listners" />
+      <recent name="com.api.automation.utils" />
+      <recent name="com.api.automation.constants" />
+      <recent name="com.api.automation.enums" />
       <recent name="constants" />
     </key>
   </component>
@@ -89,5 +101,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/api/automation/helpers/ConversationApiHelper.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
