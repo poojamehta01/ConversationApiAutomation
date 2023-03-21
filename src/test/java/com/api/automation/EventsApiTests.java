@@ -1,5 +1,5 @@
 package com.api.automation;
 
-public class EventsApiTests {
+public class EventsApiTests extends BaseTest  {
 
 }

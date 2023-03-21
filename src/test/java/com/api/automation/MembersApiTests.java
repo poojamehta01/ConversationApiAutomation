@@ -1,5 +1,5 @@
 package com.api.automation;
 
-public class MembersApiTests {
+public class MembersApiTests extends BaseTest {
 
 }

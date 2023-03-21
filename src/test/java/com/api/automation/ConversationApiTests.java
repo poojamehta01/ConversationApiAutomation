@@ -11,7 +11,7 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class ConversationApiTests {
+public class ConversationApiTests extends BaseTest  {
 
   @Test(description = "create Conversation")
 
