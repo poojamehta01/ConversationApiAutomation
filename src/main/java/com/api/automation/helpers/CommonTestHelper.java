@@ -226,6 +226,7 @@ public class CommonTestHelper {
         return testNgParams;
       }
     }
+    System.out.println(PropertiesUtil.getFileProperties(fileName).getProperty(key));
     return PropertiesUtil.getFileProperties(fileName).getProperty(key);
   }
 

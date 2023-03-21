@@ -1,0 +1,1 @@
+{"uuid":"be8107c1-b916-498b-9423-d8c559649393","name":"com.api.automation.ConversationApiTests","children":["76deaad0-4420-416c-95f8-55b1a67a04e7"],"befores":[{"name":"startTest","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1679369939025,"stop":1679369939028}],"afters":[],"start":1679369939001,"stop":1679369944804}

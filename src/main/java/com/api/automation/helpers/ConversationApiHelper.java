@@ -19,11 +19,11 @@ public class ConversationApiHelper {
     headers.put("Content-type", "application/json");
     return headers;
   }
-  public static ApiRequestBuilder createConversation(Method methodType,int expectedStatusCode, CreateConversationRequeset createConversationRequeset) {
-
+  public static ApiRequestBuilder createConversation(Method methodType,int expectedStatusCode, CreateConversationRequeset createConversationRequeset,String jwtToken) {
+    System.out.println(BASE_URL);
     return ApiRequestBuilder.builder()
         .requestMethod(methodType)
-        .
+        .requestHeaders(getHeaders(jwtToken))
         .requestBody(getJsonString(createConversationRequeset))
         .endPoint(BASE_URL+CONVERSATION_ENDPOINT)
         .expectedStatusCode(expectedStatusCode)
