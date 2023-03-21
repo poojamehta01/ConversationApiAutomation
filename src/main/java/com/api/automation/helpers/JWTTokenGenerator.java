@@ -32,8 +32,7 @@ public class JWTTokenGenerator {
     long nowMillis = System.currentTimeMillis();
     long expMillis = nowMillis + 3600000;
     Date exp = new Date(expMillis);
-    String payload = "{\"application_id\":\"<your_application_id>\"}".replace(
-        "<your_application_id>", APP_ID);
+
 
     // Build the JWT token
     byte[] keyBytes = apiSecret.getBytes();
@@ -48,7 +47,7 @@ public class JWTTokenGenerator {
         .setIssuedAt(new Date())
         .setExpiration(exp)
         .claim("application_id", "<your_application_id>".replace(
-                "<your_application_id>", "9ca0044e-47fe-4c00-8c7d-e37a7e9dd1a6"))
+                "<your_application_id>", APP_ID))
         .signWith(key, SignatureAlgorithm.HS256)
         .compact();
 
