@@ -1,0 +1,16 @@
+<settings>
+  <profiles>
+    <profile>
+      <id>nexmo-repo</id>
+      <repositories>
+        <repository>
+          <id>nexmo-repo</id>
+          <url>https://m2repository-nexmo.forge.dev.nexmo.com/releases/</url>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <activeProfile>nexmo-repo</activeProfile>
+  </activeProfiles>
+</settings>

@@ -12,7 +12,10 @@ public class CommonConstants {
   public static final String REPORT_NAME = "reportName";
   public static final String BASE_URL = "https://api.nexmo.com/v0.1";
   public static final String CONFIG_PROPERTIES = "config.properties";
-  public static final String SECRETS_FILE_NAME = "secrets.properties";
+  public static final String PRIVATE_KEY = "src/main/resources/private.key";
+  public static final String APP_ID = "4962f474-1c07-41bf-bffb-13c324acd34e";
+
+
 
 
 }

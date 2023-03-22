@@ -1,10 +1,10 @@
 package com.api.automation.helpers;
 
 import static com.api.automation.constants.CommonConstants.BASE_URL;
-import static com.api.automation.constants.ConversationApiConstants.CONVERSATION_ENDPOINT;
+import static com.api.automation.constants.EndPointConstants.CONVERSATION_ENDPOINT;
 import static com.api.automation.helpers.CommonTestHelper.getJsonString;
 
-import com.api.automation.pojos.requests.CreateConversationRequeset;
+import com.api.automation.pojos.requests.CreateConversationRequest;
 import com.api.automation.utils.ApiRequestBuilder;
 import io.restassured.http.Method;
 import java.util.HashMap;
@@ -19,7 +19,7 @@ public class ConversationApiHelper {
     headers.put("Content-type", "application/json");
     return headers;
   }
-  public static ApiRequestBuilder createConversation(Method methodType,int expectedStatusCode, CreateConversationRequeset createConversationRequeset,String jwtToken) {
+  public static ApiRequestBuilder createConversation(Method methodType,int expectedStatusCode, CreateConversationRequest createConversationRequeset,String jwtToken) {
     System.out.println(BASE_URL);
     return ApiRequestBuilder.builder()
         .requestMethod(methodType)

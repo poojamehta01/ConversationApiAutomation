@@ -59,6 +59,15 @@
   </properties>
 
   <dependencies>
+    <!-- https://mvnrepository.com/artifact/com.nexmo/client -->
+    <!-- https://mvnrepository.com/artifact/com.vonage/client -->
+    <dependency>
+      <groupId>com.vonage</groupId>
+      <artifactId>jwt</artifactId>
+      <version>1.0.2</version>
+    </dependency>
+
+
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
@@ -352,6 +361,8 @@
       <scope>runtime</scope>
     </dependency>
   </dependencies>
+
+
 
   <build>
     <plugins>

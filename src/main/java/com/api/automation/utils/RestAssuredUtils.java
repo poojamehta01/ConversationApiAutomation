@@ -1,6 +1,7 @@
 package com.api.automation.utils;
 
 import static com.api.automation.helpers.CommonTestHelper.getJsonString;
+
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;

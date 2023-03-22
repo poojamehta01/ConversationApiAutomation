@@ -1,6 +1,5 @@
 package com.api.automation.helpers;
 
-import com.api.automation.enums.FileExtensions;
 import com.api.automation.listners.TestNgParameters;
 import com.api.automation.utils.PropertiesUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -14,34 +13,17 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
-import java.security.InvalidKeyException;
-import java.security.KeyFactory;
-import java.security.NoSuchAlgorithmException;
-import java.security.interfaces.RSAPublicKey;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.X509EncodedKeySpec;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
-import java.util.Arrays;
-import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -67,6 +49,12 @@ public class CommonTestHelper {
     FakeValuesService fakeValuesService =
         new FakeValuesService(new Locale("en-GB"), new RandomService());
     return fakeValuesService.regexify(regex);
+  }
+
+  public static String randomUri() {
+    Faker faker = new Faker();
+    return faker.internet().url();
+
   }
 
   public static String randomBothify(String bothify) {
@@ -226,66 +214,14 @@ public class CommonTestHelper {
         return testNgParams;
       }
     }
-    System.out.println(PropertiesUtil.getFileProperties(fileName).getProperty(key));
     return PropertiesUtil.getFileProperties(fileName).getProperty(key);
   }
 
-  public String readPubKey(String filePath) throws IOException {
-    File pubKeyFile = new File(filePath);
-    String key = Files.readString(pubKeyFile.toPath(), Charset.defaultCharset());
-    return key.replace("-----BEGIN PUBLIC KEY-----", "")
-        .replaceAll(System.lineSeparator(), "")
-        .replace("-----END PUBLIC KEY-----", "");
+  public static String readKey(String filePath) throws IOException {
+    System.out.println("this is file path"+filePath);
+    File KeyFile = new File(filePath);
+    String key = Files.readString(KeyFile.toPath(), Charset.defaultCharset());
+    return key;
   }
 
-  public String getSignature(String clientId, String filePath)
-      throws IOException, NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException,
-      InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-    String clientIdWithEpochTimeStamp = clientId + "." + Instant.now().getEpochSecond();
-    byte[] keyBytes = Files.readAllBytes(new File(filePath).toPath());
-    String publicKeyContent = new String(keyBytes);
-    publicKeyContent =
-        publicKeyContent
-            .replaceAll("[\\t\\n\\r]", "")
-            .replace("-----BEGIN PUBLIC KEY-----", "")
-            .replace("-----END PUBLIC KEY-----", "");
-    KeyFactory kf = KeyFactory.getInstance("RSA");
-    X509EncodedKeySpec keySpecX509 =
-        new X509EncodedKeySpec(Base64.getDecoder().decode(publicKeyContent));
-    RSAPublicKey pubKey = (RSAPublicKey) kf.generatePublic(keySpecX509);
-    final Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA-1AndMGF1Padding");
-    cipher.init(Cipher.ENCRYPT_MODE, pubKey);
-    return Base64.getEncoder()
-        .encodeToString(cipher.doFinal(clientIdWithEpochTimeStamp.getBytes()));
-  }
-
-  public String getSignatureWithPublicKey(String clientId, String publicKey)
-      throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException,
-      InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-    String clientIdWithEpochTimeStamp = clientId + "." + Instant.now().getEpochSecond();
-    publicKey =
-        publicKey
-            .replaceAll("[\\t\\n\\r]", "")
-            .replace("-----BEGIN PUBLIC KEY-----", "")
-            .replace("-----END PUBLIC KEY-----", "");
-    KeyFactory kf = KeyFactory.getInstance("RSA");
-    X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(publicKey));
-    RSAPublicKey pubKey = (RSAPublicKey) kf.generatePublic(keySpecX509);
-    final Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA-1AndMGF1Padding");
-    cipher.init(Cipher.ENCRYPT_MODE, pubKey);
-    return Base64.getEncoder()
-        .encodeToString(cipher.doFinal(clientIdWithEpochTimeStamp.getBytes()));
-  }
-
-  public static List<String> getAvailableFileExtensions() {
-    return Arrays.stream(FileExtensions.values())
-        .map(FileExtensions::getFileExtension)
-        .collect(Collectors.toList());
-  }
-
-  public static boolean doesPatternMatch(String regexToBeMatched, String stringToBeMatched) {
-    Pattern pattern = Pattern.compile(regexToBeMatched, Pattern.CASE_INSENSITIVE);
-    Matcher matcher = pattern.matcher(stringToBeMatched);
-    return matcher.find();
-  }
 }

@@ -1,12 +1,15 @@
 package com.api.automation.constants;
 
+import static com.api.automation.helpers.CommonTestHelper.randomName;
+import static com.api.automation.helpers.CommonTestHelper.randomRegex;
+import static com.api.automation.helpers.CommonTestHelper.randomUri;
+
 public class ConversationApiConstants {
 
-  public static final String CONVERSATION_ENDPOINT = "/conversations";
-  public static final String USER_ENPOINT = CONVERSATION_ENDPOINT+"/{CONVERSATION_ID}/users";
-  public static final String MESSAGES_ENPOINT = CONVERSATION_ENDPOINT+ "/{CONVERSATION_ID}/messages";
-  public static final String EVENTS_ENPOINT = "/events";
-  public static final String LEGS_ENPOINT =CONVERSATION_ENDPOINT+ "/{CONVERSATION_ID}/legs";
-  public static final String MEMBERS_ENPOINT = CONVERSATION_ENDPOINT+ "/{CONVERSATION_ID)/members";
+  public static final String NAME = "test_" + randomRegex("[a-z0-9]{21}");
+  public static final String DISPLAY_NAME = "test_" + randomName();
+  public static final String IMAGE_URL = "https://" + randomUri();
+  public static final int TTL = 1;
+
 
 }

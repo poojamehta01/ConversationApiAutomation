@@ -5,10 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="19267e0d-f16f-4927-a58f-663811edb201" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/api/automation/pojos/requests/CreateConversationRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/constants/CommonConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/automation/constants/CommonConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/constants/ConversationApiConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/automation/constants/EndPointConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/helpers/CommonTestHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/automation/helpers/CommonTestHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/helpers/ConversationApiDataProviderHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/automation/helpers/ConversationApiDataProviderHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/helpers/ConversationApiHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/automation/helpers/ConversationApiHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/secrets/secrets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/automation/secrets/secrets.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/helpers/JWTTokenGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/pojos/requests/CreateConversationRequeset.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/pojos/response/CreateConversationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/automation/pojos/response/CreateConversationResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/secrets/secrets.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/utils/RestAssuredUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/automation/utils/RestAssuredUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/api/automation/ConversationApiTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/api/automation/ConversationApiTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,13 +75,14 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/Users/poojamehta/Desktop/testing/ConversionApiAutomation/suites"
+    "last_opened_file_path": "/Users/poojamehta/Desktop/testing/ConversionApiAutomation"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/suites" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/suites" />
       <recent name="$PROJECT_DIR$/src/main/java" />
       <recent name="$PROJECT_DIR$/src/main/java/com/api/automation" />
     </key>
@@ -81,6 +93,91 @@
       <recent name="com.api.automation" />
       <recent name="com.api.automation.utils" />
     </key>
+  </component>
+  <component name="RunManager" selected="TestNG.ConversationApiTests.createConversation">
+    <configuration name="JWTTokenGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.api.automation.helpers.JWTTokenGenerator" />
+      <module name="ConversionApiAutomation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.api.automation.helpers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JwtTokenGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.api.automation.helpers.JwtTokenGenerator" />
+      <module name="ConversionApiAutomation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.api.automation.helpers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="VonageJWT" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.api.automation.helpers.VonageJWT" />
+      <module name="ConversionApiAutomation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.api.automation.helpers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ConversationApiTests" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="ConversionApiAutomation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.api.automation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.api.automation" />
+      <option name="MAIN_CLASS_NAME" value="com.api.automation.ConversationApiTests" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ConversationApiTests.createConversation" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="ConversionApiAutomation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.api.automation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.api.automation" />
+      <option name="MAIN_CLASS_NAME" value="com.api.automation.ConversationApiTests" />
+      <option name="METHOD_NAME" value="createConversation" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="TestNG.ConversationApiTests.createConversation" />
+        <item itemvalue="TestNG.ConversationApiTests" />
+        <item itemvalue="Application.JwtTokenGenerator" />
+        <item itemvalue="Application.VonageJWT" />
+        <item itemvalue="Application.JWTTokenGenerator" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -114,7 +211,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/api/automation/helpers/ConversationApiDataProviderHelper.java</url>
-          <line>11</line>
+          <line>15</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>

@@ -1,5 +1,10 @@
 package com.api.automation.pojos.response;
 
-public class CreateConversationResponse {
+import lombok.Data;
 
+@Data
+public  class CreateConversationResponse {
+
+  public String id;
+  public String href;
 }
