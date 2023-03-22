@@ -51,4 +51,6 @@ test-output/
 src/main/resources/private.key
 bin
 allure-results/
+allure-report/
+.allure/
 integration-tests.iml

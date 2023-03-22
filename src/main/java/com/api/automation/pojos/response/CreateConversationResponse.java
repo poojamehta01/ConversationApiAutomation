@@ -1,9 +1,11 @@
 package com.api.automation.pojos.response;
 
 import lombok.Data;
+import lombok.Getter;
 
 @Data
-public  class CreateConversationResponse {
+@Getter
+public class CreateConversationResponse {
 
   public String id;
   public String href;

@@ -6,10 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 
-/**
- * Builds any API request that can be sent to process
- *
- */
+/** Builds any API request that can be sent to process */
 @Data
 @Builder
 public class ApiRequestBuilder {

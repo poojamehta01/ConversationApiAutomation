@@ -6,9 +6,7 @@ import java.io.InputStream;
 import java.util.Properties;
 import lombok.extern.slf4j.Slf4j;
 
-/**
- * Fetches data from a Properties File which is present in resources folder.
- */
+/** Fetches data from a Properties File which is present in resources folder. */
 @Slf4j
 public class PropertiesUtil {
 

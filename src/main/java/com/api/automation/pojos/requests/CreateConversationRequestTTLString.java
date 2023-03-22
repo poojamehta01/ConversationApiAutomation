@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @Builder
 @JsonIgnoreProperties
-public class CreateConversationRequest {
+public class CreateConversationRequestTTLString {
 
   public String name;
   public String display_name;
@@ -17,7 +17,6 @@ public class CreateConversationRequest {
   @Data
   @Builder
   public static class PropertiesObj {
-
-    public int ttl;
+    public String ttl;
   }
 }

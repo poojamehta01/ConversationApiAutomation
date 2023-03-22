@@ -28,10 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-/**
- * Commons Test Helper Methods
- *
- */
+/** Commons Test Helper Methods */
 @Slf4j
 public class CommonTestHelper {
 
@@ -54,7 +51,6 @@ public class CommonTestHelper {
   public static String randomUri() {
     Faker faker = new Faker();
     return faker.internet().url();
-
   }
 
   public static String randomBothify(String bothify) {
@@ -218,10 +214,9 @@ public class CommonTestHelper {
   }
 
   public static String readKey(String filePath) throws IOException {
-    System.out.println("this is file path"+filePath);
+    System.out.println("this is file path" + filePath);
     File KeyFile = new File(filePath);
     String key = Files.readString(KeyFile.toPath(), Charset.defaultCharset());
     return key;
   }
-
 }

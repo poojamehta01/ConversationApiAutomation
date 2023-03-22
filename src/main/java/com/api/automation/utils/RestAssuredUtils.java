@@ -10,11 +10,9 @@ import java.io.InputStream;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
-//import org.testng.Assert;
+// import org.testng.Assert;
 
-/**
- * Contains Wrapper for all RestAssured APIs which gives us back the response
- */
+/** Contains Wrapper for all RestAssured APIs which gives us back the response */
 @Slf4j
 public class RestAssuredUtils {
 
@@ -67,7 +65,6 @@ public class RestAssuredUtils {
       log.info("Setting Body: " + requestBody);
       specification.body(requestBody);
     }
-
 
     if (!Objects.isNull(apiRequest.getFormParams())) {
       log.info("Setting Form Params: " + apiRequest.getFormParams());

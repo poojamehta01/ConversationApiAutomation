@@ -3,10 +3,7 @@ package com.api.automation.listners;
 import java.util.Map;
 import org.testng.ISuite;
 
-/**
- * Class to maintain testNg Parameters of a given testNg file
- *
- */
+/** Class to maintain testNg Parameters of a given testNg file */
 public class TestNgParameters {
 
   private Map<String, String> testNgParams;

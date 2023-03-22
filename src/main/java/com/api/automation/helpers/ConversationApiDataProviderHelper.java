@@ -14,16 +14,15 @@ public class ConversationApiDataProviderHelper {
 
     switch (m.getName()) {
       case "createConversationNamePositive":
-        return new Object[][]{
-            // name,displayName, imageUrl, properties-ttl
-            {"test_"+randomRegex("\"[a-z0-9]{251}\""),randomName(),randomUri(),"{ttl:1}"},
-
+        return new Object[][] {
+          // name,displayName, imageUrl, properties-ttl
+          {"test_" + randomRegex("\"[a-z0-9]{251}\""), randomName(), randomUri(), "{ttl:1}"},
         };
       default:
         return new Object[][] {};
     }
     // name
-    //postiive
+    // postiive
     // unique name only string, empty
     // negative
     // other than string, null
@@ -39,8 +38,6 @@ public class ConversationApiDataProviderHelper {
     // TTL
     // P - only num
     // N - other than num, negative num
-
-
 
   }
 }

@@ -2,8 +2,8 @@ package com.api.automation;
 
 import static com.api.automation.constants.CommonConstants.BASE_URL;
 import static com.api.automation.constants.CommonConstants.CONFIG_PROPERTIES;
-import com.api.automation.helpers.CommonTestHelper;
 
+import com.api.automation.helpers.CommonTestHelper;
 import com.api.automation.listners.TestListener;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.BeforeClass;

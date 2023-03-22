@@ -5,9 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.testng.ISuiteListener;
 import org.testng.ITestListener;
 
-/**
- * Test Listener: Contains configurations to handle test case start, end, success, failure, skip
- */
+/** Test Listener: Contains configurations to handle test case start, end, success, failure, skip */
 @Slf4j
 public class TestListener implements ITestListener, ISuiteListener {
 
@@ -25,5 +23,4 @@ public class TestListener implements ITestListener, ISuiteListener {
   private static final String MODULE_NAME = "moduleName";
   private static final String REPORT_NAME = "reportName";
   private static final String CONFIG_PROPERTIES = "config.properties";
-
 }
