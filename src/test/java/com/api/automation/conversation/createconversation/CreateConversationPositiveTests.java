@@ -1,8 +1,9 @@
-package com.api.automation.createconversation;
+package com.api.automation.conversation.createconversation;
 
 import static com.api.automation.constants.CommonConstants.APP_ID;
 import static com.api.automation.constants.CommonConstants.PRIVATE_KEY;
 import static com.api.automation.constants.ConversationApiConstants.DISPLAY_NAME;
+import static com.api.automation.constants.ConversationApiConstants.HREF;
 import static com.api.automation.constants.ConversationApiConstants.IMAGE_URL;
 import static com.api.automation.constants.ConversationApiConstants.TTL;
 import static com.api.automation.helpers.CommonTestHelper.randomRegex;
@@ -28,9 +29,9 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 @Listeners({io.qameta.allure.testng.AllureTestNg.class})
-@Epic("Epic name")
-@Feature("Feature name")
-@Story("Story name")
+@Epic("API Automation")
+@Feature("Conversation Api")
+@Story("Create Conversation Positive testCases")
 public class CreateConversationPositiveTests extends BaseTest {
 
   private String jwtToken;
@@ -49,14 +50,12 @@ public class CreateConversationPositiveTests extends BaseTest {
   @Test(description = "PC-create Conversation with name,display,imageUrl,properties")
   public void createConversation() {
 
-    System.out.println("this is token in test");
-    PropertiesObj prop = PropertiesObj.builder().ttl(TTL).build();
     CreateConversationRequest createConversationRequest =
         CreateConversationRequest.builder()
+            .name("test_" + randomRegex("[A-Za-z0-9]{25}"))
             .display_name(DISPLAY_NAME)
-            .name("test_" + randomRegex("[a-z0-9]{21}"))
             .image_url(IMAGE_URL)
-            .properties(prop)
+            .properties(PropertiesObj.builder().ttl(TTL).build())
             .build();
     ApiRequestBuilder createConversationBuilder =
         ConversationApiHelper.createConversationBuilder(
@@ -69,18 +68,12 @@ public class CreateConversationPositiveTests extends BaseTest {
     softAssert.assertNotNull(response.getId());
     softAssert.assertNotNull(response.getHref());
     softAssert.assertTrue(response.getId().contains("CON-"));
-    softAssert.assertTrue(
-        response
-            .getHref()
-            .equals("https://api-us-3.vonage.com/v0.1/conversations/" + response.getId()));
+    softAssert.assertTrue(response.getHref().equals(HREF + response.getId()));
     softAssert.assertAll();
   }
 
   @Test(description = "PC-create Conversation with emptyBody")
   public void createConversationWithEmptyPayload() {
-
-    System.out.println("this is token in test");
-    PropertiesObj prop = PropertiesObj.builder().ttl(TTL).build();
 
     ApiRequestBuilder createConversationBuilder =
         ConversationApiHelper.createConversationBuilder(POST, 200, jwtToken);
@@ -92,19 +85,16 @@ public class CreateConversationPositiveTests extends BaseTest {
     softAssert.assertNotNull(response.getId());
     softAssert.assertNotNull(response.getHref());
     softAssert.assertTrue(response.getId().contains("CON-"));
-    softAssert.assertTrue(
-        response
-            .getHref()
-            .equals("https://api-us-3.vonage.com/v0.1/conversations/" + response.getId()));
+    softAssert.assertTrue(response.getHref().equals(HREF + response.getId()));
     softAssert.assertAll();
   }
 
   @Test(
       description =
-          "PC-create Conversation with all names emptyString,threeSpacesString,1000charName positive testcases",
+          "PC-create Conversation with all names emptyString,threeSpacesString,longName positive testcases",
       dataProvider = "conversationApi_dataProvider",
       dataProviderClass = CreateConversationDataProviderHelper.class)
-  public void createConversationNamePositiveTc(String name) {
+  public void createConversationNameValid(String name) {
     CreateConversationRequest createConversationRequest =
         CreateConversationRequest.builder()
             .name(name)
@@ -123,18 +113,15 @@ public class CreateConversationPositiveTests extends BaseTest {
     softAssert.assertNotNull(response.getId());
     softAssert.assertNotNull(response.getHref());
     softAssert.assertTrue(response.getId().contains("CON-"));
-    softAssert.assertTrue(
-        response
-            .getHref()
-            .equals("https://api-us-3.vonage.com/v0.1/conversations/" + response.getId()));
+    softAssert.assertTrue(response.getHref().equals(HREF + response.getId()));
     softAssert.assertAll();
   }
 
   @Test(
-      description = "PC-create Conversation DISPLAY_NAME positive testcases",
+      description = "PC-create Conversation DISPLAY_NAME null, with whiteSpace",
       dataProvider = "conversationApi_dataProvider",
       dataProviderClass = CreateConversationDataProviderHelper.class)
-  public void createConversationDisplayNamePositiveTc(String displayName) {
+  public void createConversationDisplayNameValid(String displayName) {
     CreateConversationRequest createConversationRequest =
         CreateConversationRequest.builder()
             .name("test_" + randomRegex("[a-z0-9]{21}"))
@@ -153,10 +140,7 @@ public class CreateConversationPositiveTests extends BaseTest {
     softAssert.assertNotNull(response.getId());
     softAssert.assertNotNull(response.getHref());
     softAssert.assertTrue(response.getId().contains("CON-"));
-    softAssert.assertTrue(
-        response
-            .getHref()
-            .equals("https://api-us-3.vonage.com/v0.1/conversations/" + response.getId()));
+    softAssert.assertTrue(response.getHref().equals(HREF + response.getId()));
   }
 
   @Test(description = "PC-create Conversation with ImageUrl Empty ")
@@ -179,21 +163,21 @@ public class CreateConversationPositiveTests extends BaseTest {
     softAssert.assertNotNull(response.getId());
     softAssert.assertNotNull(response.getHref());
     softAssert.assertTrue(response.getId().contains("CON-"));
-    softAssert.assertTrue(
-        response
-            .getHref()
-            .equals("https://api-us-3.vonage.com/v0.1/conversations/" + response.getId()));
+    softAssert.assertTrue(response.getHref().equals(HREF + response.getId()));
     softAssert.assertAll();
   }
 
-  @Test(description = "PC-create Conversation with TTL String num ")
-  public void createConversationTTLStringNum() {
+  @Test(
+      description = "PC-create Conversation with TTL 0,Float,String ",
+      dataProvider = "conversationApi_dataProvider",
+      dataProviderClass = CreateConversationDataProviderHelper.class)
+  public void createConversationTTLValid(Object ttl) {
     CreateConversationRequest createConversationRequest =
         CreateConversationRequest.builder()
             .name("test_" + randomRegex("[a-z0-9]{21}"))
             .display_name(DISPLAY_NAME)
-            .image_url("")
-            .properties(PropertiesObj.builder().ttl(Integer.parseInt("1")).build())
+            .image_url(IMAGE_URL)
+            .properties(PropertiesObj.builder().ttl(ttl).build())
             .build();
     ApiRequestBuilder createConversationBuilder =
         ConversationApiHelper.createConversationBuilder(
@@ -206,15 +190,8 @@ public class CreateConversationPositiveTests extends BaseTest {
     softAssert.assertNotNull(response.getId());
     softAssert.assertNotNull(response.getHref());
     softAssert.assertTrue(response.getId().contains("CON-"));
-    softAssert.assertTrue(
-        response
-            .getHref()
-            .equals("https://api-us-3.vonage.com/v0.1/conversations/" + response.getId()));
+    softAssert.assertTrue(response.getHref().equals(HREF + response.getId()));
     softAssert.assertAll();
   }
-
-  // can be a string, float allowed 1.00,1.34344
-  // todo : property cases
-  // other than key-value pair defined
 
 }

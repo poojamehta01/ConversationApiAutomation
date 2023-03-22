@@ -6,18 +6,17 @@ import lombok.Data;
 
 @Data
 @Builder
-@JsonIgnoreProperties
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CreateConversationRequest {
 
-  public String name;
-  public String display_name;
-  public String image_url;
+  public Object name;
+  public Object display_name;
+  public Object image_url;
   public PropertiesObj properties;
 
   @Data
   @Builder
+  @JsonIgnoreProperties(ignoreUnknown = true)
   public static class PropertiesObj {
-
-    public int ttl;
-  }
+    public Object ttl;}
 }

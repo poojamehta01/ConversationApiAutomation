@@ -3,7 +3,7 @@ package com.api.automation.enums;
 import lombok.Getter;
 
 public enum ErrorEnums {
-  DUPLICATE_NAME(
+  DUPLICATE_NAME_ERROR(
       "The request failed because the conversation name already exists. Please provide a unique conversation name and try again.",
       "",
       "conversation:error:duplicate-name"),
@@ -28,6 +28,13 @@ public enum ErrorEnums {
   TTL_DATATYPE_INCORRECT(
       "Input validation failure.", "\"ttl\" must be a number", "http:error:validation-fail"),
 
+  TTL_NOT_SAFE_NUM(
+      "Input validation failure.", "\"ttl\" must be a safe number", "http:error:validation-fail"),
+
+  TTL_LESS_THAN_ZERO(
+      "Input validation failure.",
+      "\"ttl\" must be greater than or equal to 0",
+      "http:error:validation-fail"),
   PROPERTY_INCORRECT_KEY(
       "Input validation failure.", "\"incorrectKey\" is not allowed", "http:error:validation-fail"),
 

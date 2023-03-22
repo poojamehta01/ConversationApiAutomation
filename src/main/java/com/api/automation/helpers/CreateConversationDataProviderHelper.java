@@ -1,5 +1,6 @@
 package com.api.automation.helpers;
 
+import static com.api.automation.helpers.CommonTestHelper.randomNumber;
 import static com.api.automation.helpers.CommonTestHelper.randomRegex;
 import static io.restassured.http.Method.DELETE;
 import static io.restassured.http.Method.PATCH;
@@ -12,48 +13,36 @@ public class CreateConversationDataProviderHelper {
 
   @DataProvider(name = "conversationApi_dataProvider")
   public static Object[][] conversationApi_dataProvider(Method m) {
-
+    int[] arr = {};
     switch (m.getName()) {
-      case "createConversationNamePositiveTc":
-        return new Object[][] {{""}, {"   "}, {"test_" + randomRegex("[a-z0-9]{1001}")}};
+      case "createConversationNameValid":
+        return new Object[][]{{""}, {"   "}, {"test_" + randomRegex("[a-z0-9]{101}")}};
 
-      case "createConversationDisplayNamePositiveTc":
-        return new Object[][] {
-          {null}, {"  "},
+      case "createConversationNameInValid":
+        return new Object[][]{{null}, {true}, {1}, {11.22}, {arr}};
+
+      case "createConversationDisplayNameValid":
+        return new Object[][]{
+            {null}, {"  "},
         };
+      case "createConversationDisplayNameInvalid":
 
-      case "createConversationImageUrlIncorrect":
-        return new Object[][] {{"  "}, {"test"}, {null}};
-      case "createConversationIncorrectHttpMethod":
-        return new Object[][] {{DELETE}, {PUT}, {PATCH}};
-
-        //      case "createConversationPropertiesIncorrect":
-        //
-        //        return new Object[][]{
-        //            {null},
-        //            {{"incorrectKey":incorrectValue}},
-        //        };
+        return new Object[][]{
+            {""}, {true}, {1}, {11.22}, {arr}
+        };
+      case "createConversationImageUrlInValid":
+        return new Object[][]{{"  "}, {"test"}, {null}, {true}, {1}, {11.22}, {arr}};
+      case "createConversationHttpMethodInValid":
+        return new Object[][]{{DELETE}, {PUT}, {PATCH}};
+      case "createConversationTTLValid":
+        return new Object[][]{{1.2323}, {0}, {"1"}, {"1000000000000"}, {101.22}};
+      case "createConversationTTLInvalid":
+        return new Object[][]{{-1}, {"10000000000000000"}, {null}, {"  "}, {""}};
 
       default:
-        return new Object[][] {};
+        return new Object[][]{};
     }
-    // name
-    // postiive
-    // unique name only string, empty
-    // negative
-    // other than string, null
-    // display name
-    // P - duplicate allowed only string
-    // N - other than string, null
-    // url
-    // P- string but uri
-    // N- other than url, null
-    // properties
-    // P - map object, {} empty map
-    // N - other than map object, null
-    // TTL
-    // P - only num
-    // N - other than num, negative num
+
 
   }
 }

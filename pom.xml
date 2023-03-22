@@ -30,11 +30,13 @@
     <junit.version>4.13.2</junit.version>
     <snakeyaml.version>1.33</snakeyaml.version>
     <log4j-core.version>2.19.0</log4j-core.version>
+    <awaitility.version>4.2.0</awaitility.version>
     <log4j-api.version>2.19.0</log4j-api.version>
     <surefire.version>3.0.0-M7</surefire.version>
     <faker.version>1.0.2</faker.version>
     <allure.version>2.21.0</allure.version>
     <maven.surefire.version>2.21.0</maven.surefire.version>
+    <groovy-all.version>4.0.6</groovy-all.version>
     <suiteFile>suites/testng.xml</suiteFile>
     <spotless-maven-plugin.version>2.23.0</spotless-maven-plugin.version>
     <spotless-maven-plugin.version>2.27.2</spotless-maven-plugin.version>
@@ -102,6 +104,16 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>org.apache.groovy</groupId>
+      <artifactId>groovy</artifactId>
+      <version>${groovy-all.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.groovy</groupId>
+      <artifactId>groovy-xml</artifactId>
+      <version>${groovy-all.version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.yaml</groupId>
       <artifactId>snakeyaml</artifactId>
       <version>${snakeyaml.version}</version>
@@ -125,7 +137,11 @@
       <artifactId>json-simple</artifactId>
       <version>${json-simple.version}</version>
     </dependency>
-
+    <dependency>
+      <groupId>org.awaitility</groupId>
+      <artifactId>awaitility</artifactId>
+      <version>${awaitility.version}</version>
+    </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
@@ -230,7 +246,6 @@
         <version>${maven.surefire.version}</version>
         <configuration>
           <suiteXmlFiles>
-            <!--suppress UnresolvedMavenProperty -->
             <suiteXmlFile>${suiteFile}</suiteXmlFile>
           </suiteXmlFiles>
 
@@ -257,6 +272,14 @@
               <style>GOOGLE</style>
             </googleJavaFormat>
           </java>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>11</source>
+          <target>11</target>
         </configuration>
       </plugin>
     </plugins>

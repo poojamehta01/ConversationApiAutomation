@@ -11,7 +11,8 @@ import static io.restassured.http.Method.POST;
 
 import com.api.automation.pojos.requests.CreateConversationRequest;
 import com.api.automation.pojos.requests.CreateConversationRequest.PropertiesObj;
-import com.api.automation.pojos.requests.CreateConversationRequestIncorrectDataType;
+import com.api.automation.pojos.requests.CreateConversationRequestIncorrectKey;
+
 import com.api.automation.utils.ApiRequestBuilder;
 import com.api.automation.utils.RestAssuredUtils;
 import io.restassured.http.Method;
@@ -46,17 +47,18 @@ public class ConversationApiHelper {
   public static ApiRequestBuilder createConversationBuilder(
       Method methodType,
       int expectedStatusCode,
-      CreateConversationRequestIncorrectDataType CreateConversationRequestIncorrectDataType,
+      CreateConversationRequestIncorrectKey createConversationRequestIncorrectKey,
       String jwtToken) {
     System.out.println(BASE_URL);
     return ApiRequestBuilder.builder()
         .requestMethod(methodType)
         .requestHeaders(getHeaders(jwtToken))
-        .requestBody(getJsonString(CreateConversationRequestIncorrectDataType))
+        .requestBody(getJsonString(createConversationRequestIncorrectKey))
         .endPoint(BASE_URL + CONVERSATION_ENDPOINT)
         .expectedStatusCode(expectedStatusCode)
         .build();
   }
+
 
   public static ApiRequestBuilder createConversationBuilder(
       Method methodType, int expectedStatusCode, String jwtToken) {

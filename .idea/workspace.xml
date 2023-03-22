@@ -5,16 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="19267e0d-f16f-4927-a58f-663811edb201" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/codestream.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codestream.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/constants/CommonConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/automation/constants/CommonConstants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/constants/ConversationApiConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/automation/constants/ConversationApiConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/enums/ErrorEnums.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/automation/enums/ErrorEnums.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/helpers/ConversationApiDataProviderHelper.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/helpers/ConversationApiHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/automation/helpers/ConversationApiHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/helpers/CreateConversationDataProviderHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/automation/helpers/CreateConversationDataProviderHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/pojos/requests/CreateConversationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/automation/pojos/requests/CreateConversationRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/pojos/response/CreateConversationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/automation/pojos/response/CreateConversationResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/api/automation/createconversation/CreateConversationPositiveTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/api/automation/createconversation/CreateConversationPositiveTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/pojos/requests/CreateConversationRequestIncorrectDataType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/automation/pojos/requests/CreateConversationRequestIncorrectKey.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/automation/pojos/requests/CreateConversationRequestTTLString.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/api/automation/AppTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/api/automation/EventsApiTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/api/automation/events/e2eEventsApiTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/api/automation/LegsApiTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/api/automation/legs/LegsApiTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/api/automation/MembersApiTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/api/automation/members/MembersApiTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/api/automation/MessagesApiTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/api/automation/messages/MessagesApiTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/api/automation/UsersApiTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/api/automation/users/UsersApiTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/api/automation/createconversation/CreateConversationNegativeTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/api/automation/conversation/createconversation/CreateConversationNegativeTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/api/automation/createconversation/CreateConversationPositiveTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/api/automation/conversation/createconversation/CreateConversationPositiveTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/suites/conversationApiTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/suites/conversationApiTest.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,13 +76,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/Users/poojamehta/Desktop/testing/conversationApiTesting/ConversationApiAutomation/suites"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/poojamehta/Desktop/testing/conversationApiTesting/ConversationApiAutomation/suites&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/suites" />
@@ -88,32 +99,18 @@
       <recent name="com.api.automation.helpers.reports" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.CreateConversationPositiveTests.createConversation">
-    <configuration name="com.api.automation.createconversation in ConversationApiAutomation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="TestNG.CreateConversationPositiveTests.createConversationTTLValid">
+    <configuration name="CreateConversationNegativeTests.createConversationDisplayNameInvalid" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="ConversationApiAutomation" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.api.automation.createconversation.*" />
+          <option name="PATTERN" value="com.api.automation.conversation.createconversation.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.api.automation.createconversation" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CreateConversationNegativeTests.createConversationIncorrectDataType" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="ConversationApiAutomation" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.api.automation.createconversation.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.api.automation.createconversation" />
-      <option name="MAIN_CLASS_NAME" value="com.api.automation.createconversation.CreateConversationNegativeTests" />
-      <option name="METHOD_NAME" value="createConversationIncorrectDataType" />
+      <option name="PACKAGE_NAME" value="com.api.automation.conversation.createconversation" />
+      <option name="MAIN_CLASS_NAME" value="com.api.automation.conversation.createconversation.CreateConversationNegativeTests" />
+      <option name="METHOD_NAME" value="createConversationDisplayNameInvalid" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -121,17 +118,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CreateConversationNegativeTests.createConversationIncorrectHttpMethod" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="CreateConversationNegativeTests.createConversationImageUrlInValid" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="ConversationApiAutomation" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.api.automation.createconversation.*" />
+          <option name="PATTERN" value="com.api.automation.conversation.createconversation.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.api.automation.createconversation" />
-      <option name="MAIN_CLASS_NAME" value="com.api.automation.createconversation.CreateConversationNegativeTests" />
-      <option name="METHOD_NAME" value="createConversationIncorrectHttpMethod" />
+      <option name="PACKAGE_NAME" value="com.api.automation.conversation.createconversation" />
+      <option name="MAIN_CLASS_NAME" value="com.api.automation.conversation.createconversation.CreateConversationNegativeTests" />
+      <option name="METHOD_NAME" value="createConversationImageUrlInValid" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -139,17 +136,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CreateConversationPositiveTests.createConversation" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="CreateConversationNegativeTests.createConversationPropertyNull" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="ConversationApiAutomation" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.api.automation.createconversation.*" />
+          <option name="PATTERN" value="com.api.automation.conversation.createconversation.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.api.automation.createconversation" />
-      <option name="MAIN_CLASS_NAME" value="com.api.automation.createconversation.CreateConversationPositiveTests" />
-      <option name="METHOD_NAME" value="createConversation" />
+      <option name="PACKAGE_NAME" value="com.api.automation.conversation.createconversation" />
+      <option name="MAIN_CLASS_NAME" value="com.api.automation.conversation.createconversation.CreateConversationNegativeTests" />
+      <option name="METHOD_NAME" value="createConversationPropertyNull" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -157,10 +154,36 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="/Users/poojamehta/Desktop/testing/conversationApiTesting/ConversationApiAutomation/suites/conversationApi.xml" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="CreateConversationNegativeTests.createConversationPropertyWithIncorrectKey" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="ConversationApiAutomation" />
-      <option name="SUITE_NAME" value="$PROJECT_DIR$/suites/conversationApi.xml" />
-      <option name="TEST_OBJECT" value="SUITE" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.api.automation.conversation.createconversation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.api.automation.conversation.createconversation" />
+      <option name="MAIN_CLASS_NAME" value="com.api.automation.conversation.createconversation.CreateConversationNegativeTests" />
+      <option name="METHOD_NAME" value="createConversationPropertyWithIncorrectKey" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CreateConversationPositiveTests.createConversationTTLValid" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="ConversationApiAutomation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.api.automation.conversation.createconversation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.api.automation.conversation.createconversation" />
+      <option name="MAIN_CLASS_NAME" value="com.api.automation.conversation.createconversation.CreateConversationPositiveTests" />
+      <option name="METHOD_NAME" value="createConversationTTLValid" />
+      <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
       <method v="2">
@@ -169,11 +192,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.CreateConversationPositiveTests.createConversation" />
-        <item itemvalue="TestNG./Users/poojamehta/Desktop/testing/conversationApiTesting/ConversationApiAutomation/suites/conversationApi.xml" />
-        <item itemvalue="JUnit.com.api.automation.createconversation in ConversationApiAutomation" />
-        <item itemvalue="TestNG.CreateConversationNegativeTests.createConversationIncorrectHttpMethod" />
-        <item itemvalue="TestNG.CreateConversationNegativeTests.createConversationIncorrectDataType" />
+        <item itemvalue="TestNG.CreateConversationPositiveTests.createConversationTTLValid" />
+        <item itemvalue="TestNG.CreateConversationNegativeTests.createConversationImageUrlInValid" />
+        <item itemvalue="TestNG.CreateConversationNegativeTests.createConversationPropertyWithIncorrectKey" />
+        <item itemvalue="TestNG.CreateConversationNegativeTests.createConversationPropertyNull" />
+        <item itemvalue="TestNG.CreateConversationNegativeTests.createConversationDisplayNameInvalid" />
       </list>
     </recent_temporary>
   </component>
@@ -204,23 +227,18 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/api/automation/helpers/ConversationApiHelper.java</url>
-          <line>35</line>
+          <line>40</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/api/automation/helpers/ConversationApiDataProviderHelper.java</url>
-          <line>15</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/api/automation/createconversation/CreateConversationPositiveTests.java</url>
+          <url>file://$PROJECT_DIR$/src/test/java/com/api/automation/conversation/createconversation/CreateConversationPositiveTests.java</url>
           <line>173</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/test/java/com/api/automation/createconversation/CreateConversationPositiveTests.java</url>
+          <url>file://$PROJECT_DIR$/src/test/java/com/api/automation/conversation/createconversation/CreateConversationPositiveTests.java</url>
           <line>70</line>
-          <properties class="com.api.automation.createconversation.CreateConversationPositiveTests" method="createConversationWithEmptyPayload">
+          <properties class="com.api.automation.createconversation.CreateConversationPositiveTests">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>

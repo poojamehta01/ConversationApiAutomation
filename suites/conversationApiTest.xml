@@ -6,10 +6,10 @@
     <parameter name="moduleName" value="conversationModule"/>
     <classes>
       <class
-        name="com.api.automation.createconversation.CreateConversationNegativeTests"/>
+        name="com.api.automation.conversation.createconversation.CreateConversationNegativeTests"/>
 
       <class
-        name="com.api.automation.createconversation.CreateConversationPositiveTests"/>
+        name="com.api.automation.conversation.createconversation.CreateConversationPositiveTests"/>
     </classes>
   </test>
 </suite>
