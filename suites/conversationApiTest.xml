@@ -7,9 +7,13 @@
     <classes>
       <class
         name="com.api.automation.conversation.createconversation.CreateConversationNegativeTests"/>
-
       <class
         name="com.api.automation.conversation.createconversation.CreateConversationPositiveTests"/>
+      <class
+        name="com.api.automation.conversation.GetConversationTests"/>
+      <class
+        name="com.api.automation.conversation.DeleteConversationTests"/>
+
     </classes>
   </test>
 </suite>
