@@ -1,13 +1,20 @@
-package com.api.automation.conversation.getconversation;
+package com.api.automation.conversation;
 
 import static com.api.automation.constants.CommonConstants.APP_ID;
+import static com.api.automation.constants.CommonConstants.EXPIRED_TOKEN;
+import static com.api.automation.constants.CommonConstants.INVALID_TOKEN;
 import static com.api.automation.constants.CommonConstants.PRIVATE_KEY;
 import static com.api.automation.constants.conversation.CreateConversationConstants.DISPLAY_NAME;
 import static com.api.automation.constants.conversation.CreateConversationConstants.IMAGE_URL;
-import static com.api.automation.enums.conversation.CreateConversationEnums.GET_INVALID_CONVERSATION;
+import static com.api.automation.enums.conversation.CreateConversationEnums.EMPTY_CONVERSATION_ID;
+import static com.api.automation.enums.conversation.CreateConversationEnums.INCORRECT_HTTP_METHODS;
+import static com.api.automation.enums.conversation.CreateConversationEnums.INVALID_CONVERSATION_ID;
+import static com.api.automation.enums.conversation.CreateConversationEnums.TOKEN_EXPIRED_ERROR;
+import static com.api.automation.enums.conversation.CreateConversationEnums.TOKEN_INVALID_ERROR;
 import static com.api.automation.helpers.CommonTestHelper.randomRegex;
 import static com.api.automation.helpers.conversation.createconversation.CreateConversationApiHelper.createConversation;
 import static io.restassured.http.Method.GET;
+import static io.restassured.http.Method.POST;
 
 import com.api.automation.enums.conversation.CreateConversationEnums;
 import com.api.automation.helpers.conversation.GetConversationApiHelper;
@@ -122,12 +129,28 @@ public class GetConversationTests {
 
     ErrorResponse response = lambdaContext.getConversationResponse.as(ErrorResponse.class);
 
-    assertValidationFail(response, GET_INVALID_CONVERSATION);
+    assertValidationFail(response, INVALID_CONVERSATION_ID);
+  }
+
+  @Test(
+      description = "NC-get Conversation with conversationId empty")
+  public void getConversationWithIdEmptyId() {
+    SoftAssert softAssert = new SoftAssert();
+    ApiRequestBuilder getConversationBuilder =
+        GetConversationApiHelper.getConversationBuilder(
+            GET, 400, jwtToken, "");
+    Response getConversationResponse = RestAssuredUtils.processApiRequest(getConversationBuilder);
+    ErrorResponse response = getConversationResponse.as(ErrorResponse.class);
+    assertValidationFail(response, EMPTY_CONVERSATION_ID);
+    softAssert.assertEquals(
+        response.getError().getConversation_id().get(0), EMPTY_CONVERSATION_ID.getError());
+
+    softAssert.assertAll();
   }
 
   @DataProvider(name = "conversationIdNotFoundDataProvider")
-  public Object[][] conversationIdNotFoundDataProvider() {
-    return new Object[][] {{null}, {"xyz"}, {true}, {1}};
+  public Object[][] getConversationIdNotFoundDataProvider() {
+    return new Object[][] {{null}, {"xyz"}, {true}, {1},{1.01}};
   }
 
   @Test(
@@ -138,28 +161,49 @@ public class GetConversationTests {
         GetConversationApiHelper.getConversationBuilder(GET, 404, jwtToken, conversationId);
     Response getConversationResponse = RestAssuredUtils.processApiRequest(getConversationBuilder);
     ErrorResponse response = getConversationResponse.as(ErrorResponse.class);
-    assertValidationFail(response, GET_INVALID_CONVERSATION);
-  }
-
-  @DataProvider(name = "conversationIdInvalidDataProvider")
-  public Object[][] conversationIdInvalidDataProvider() {
-    return new Object[][] {{null},{true},{1.01}};
+    assertValidationFail(response, INVALID_CONVERSATION_ID);
   }
 
   @Test(
-      description = "NC-get Conversation with invalid conversationId-invalid",
-      dataProvider = "conversationIdInvalidDataProvider")
-  public void getConversationWithConversationIdInvalid(Object conversationId) {
+      description = "NC-get Conversation with invalid method post")
+  public void getConversationWithIncorrectHttpMethodPOST() {
     ApiRequestBuilder getConversationBuilder =
-        GetConversationApiHelper.getConversationBuilder(GET, 404, jwtToken, conversationId);
+        GetConversationApiHelper.getConversationBuilder(POST, 405, jwtToken, "test");
     Response getConversationResponse = RestAssuredUtils.processApiRequest(getConversationBuilder);
     ErrorResponse response = getConversationResponse.as(ErrorResponse.class);
-    assertValidationFail(response, GET_INVALID_CONVERSATION);
+    SoftAssert softAssert = new SoftAssert();
+    assertValidationFail(response, INCORRECT_HTTP_METHODS);
+    softAssert.assertAll();
+  }
+
+  @Test(
+      description = "NC-get Conversation with invalidToken")
+  public void getConversationTokenInvalid() {
+    ApiRequestBuilder getConversationBuilder =
+        GetConversationApiHelper.getConversationBuilder(GET, 401, INVALID_TOKEN, "test");
+    Response getConversationResponse = RestAssuredUtils.processApiRequest(getConversationBuilder);
+    ErrorResponse response = getConversationResponse.as(ErrorResponse.class);
+    SoftAssert softAssert = new SoftAssert();
+    assertValidationFail(response, TOKEN_INVALID_ERROR);
+    softAssert.assertAll();
+  }
+
+  @Test(
+      description = "NC-get Conversation with tokenExpired")
+  public void getConversationTokenExpired() {
+    ApiRequestBuilder getConversationBuilder =
+        GetConversationApiHelper.getConversationBuilder(GET, 401, EXPIRED_TOKEN, "test");
+    Response getConversationResponse = RestAssuredUtils.processApiRequest(getConversationBuilder);
+    ErrorResponse response = getConversationResponse.as(ErrorResponse.class);
+    SoftAssert softAssert = new SoftAssert();
+    assertValidationFail(response, TOKEN_EXPIRED_ERROR);
+    softAssert.assertAll();
   }
 
   private void assertValidationFail(ErrorResponse response, CreateConversationEnums enums) {
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertEquals(response.getDescription(), enums.getDescription());
     softAssert.assertEquals(response.getCode(), enums.getCode());
+    softAssert.assertAll();
   }
 }
