@@ -1,4 +1,4 @@
-package com.api.automation.pojos.requests;
+package com.api.automation.pojos.requests.conversation.createconversation;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Builder;

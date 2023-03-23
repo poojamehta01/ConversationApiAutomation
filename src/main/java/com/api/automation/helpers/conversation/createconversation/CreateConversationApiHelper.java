@@ -9,9 +9,9 @@ import static com.api.automation.constants.EndPointConstants.CONVERSATION_ENDPOI
 import static com.api.automation.helpers.CommonTestHelper.getJsonString;
 import static io.restassured.http.Method.POST;
 
-import com.api.automation.pojos.requests.CreateConversationRequest;
-import com.api.automation.pojos.requests.CreateConversationRequest.PropertiesObj;
-import com.api.automation.pojos.requests.CreateConversationRequestIncorrectKey;
+import com.api.automation.pojos.requests.conversation.createconversation.CreateConversationRequest;
+import com.api.automation.pojos.requests.conversation.createconversation.CreateConversationRequest.PropertiesObj;
+import com.api.automation.pojos.requests.conversation.createconversation.CreateConversationRequestIncorrectKey;
 
 import com.api.automation.utils.ApiRequestBuilder;
 import com.api.automation.utils.RestAssuredUtils;

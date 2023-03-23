@@ -1,4 +1,4 @@
-package com.api.automation.pojos.requests;
+package com.api.automation.pojos.requests.conversation.createconversation;
 
 import lombok.Builder;
 import lombok.Data;
