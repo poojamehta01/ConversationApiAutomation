@@ -30,7 +30,10 @@ public class GetConversationApiHelper {
   }
 
   public static ApiRequestBuilder getConversationBuilder(
-      Method methodType, int expectedStatusCode, String jwtToken, Object conversationId,
+      Method methodType,
+      int expectedStatusCode,
+      String jwtToken,
+      Object conversationId,
       IncorrectBodyRequest incorrectBodyRequest) {
     System.out.println(BASE_URL);
     return ApiRequestBuilder.builder()
@@ -41,5 +44,4 @@ public class GetConversationApiHelper {
         .expectedStatusCode(expectedStatusCode)
         .build();
   }
-
 }

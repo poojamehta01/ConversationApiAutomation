@@ -43,7 +43,7 @@ import org.testng.asserts.SoftAssert;
 @Listeners({io.qameta.allure.testng.AllureTestNg.class})
 @Epic("API Automation")
 @Feature("Conversation Api")
-@Story("Get Conversation Positive and Negative testCases")
+@Story("Delete Conversation Positive and Negative testCases")
 public class DeleteConversationTests {
 
   private String jwtToken;
@@ -60,8 +60,9 @@ public class DeleteConversationTests {
             .generate();
   }
 
-
-  @Test(description = "PC-Delete Conversation with valid conversationId with all the fields in createConversation Payload")
+  @Test(
+      description =
+          "PC-Delete Conversation with valid conversationId with all the fields in createConversation Payload")
   public void deleteConversationWithConversationIdValid() {
     SoftAssert softAssert = new SoftAssert();
     CreateConversationRequest createConversationRequest =
@@ -72,28 +73,26 @@ public class DeleteConversationTests {
             .properties(PropertiesObj.builder().ttl(60).build())
             .build();
     responseMap = createConversation(jwtToken, createConversationRequest);
-    CreateConversationResponse conversationResponse = (CreateConversationResponse) responseMap.get(
-        "response");
+    CreateConversationResponse conversationResponse =
+        (CreateConversationResponse) responseMap.get("response");
 
     softAssert.assertNotNull(conversationResponse.getId());
     softAssert.assertNotNull(conversationResponse.getHref());
     ApiRequestBuilder deleteConversationBuilder =
         DeleteConversationApiHelper.deleteConversationBuilder(
             DELETE, 200, jwtToken, conversationResponse.getId());
-    Response deleteConversationResponse = RestAssuredUtils.processApiRequest(
-        deleteConversationBuilder);
+    Response deleteConversationResponse =
+        RestAssuredUtils.processApiRequest(deleteConversationBuilder);
     softAssert.assertTrue(deleteConversationResponse.getBody().equals("{}"));
-
   }
 
-  @Test(
-      description = "NC-delete Conversation with conversationId empty")
+  @Test(description = "NC-delete Conversation with conversationId empty")
   public void deleteConversationWithIdEmptyId() {
     SoftAssert softAssert = new SoftAssert();
     ApiRequestBuilder deleteConversationBuilder =
-        DeleteConversationApiHelper.deleteConversationBuilder(
-            DELETE, 400, jwtToken, "");
-    Response deleteConversationResponse = RestAssuredUtils.processApiRequest(deleteConversationBuilder);
+        DeleteConversationApiHelper.deleteConversationBuilder(DELETE, 400, jwtToken, "");
+    Response deleteConversationResponse =
+        RestAssuredUtils.processApiRequest(deleteConversationBuilder);
     ErrorResponse response = deleteConversationResponse.as(ErrorResponse.class);
     assertValidationFail(response, EMPTY_CONVERSATION_ID);
     softAssert.assertEquals(
@@ -103,7 +102,8 @@ public class DeleteConversationTests {
   }
 
   @Test(
-      description = "NC-Delete Conversation with conversationId of conversation with ttl as 1 second")
+      description =
+          "NC-Delete Conversation with conversationId of conversation with ttl as 1 second")
   public void deleteConversationWithTTLOneSecond() {
     CreateConversationRequest createConversationRequest =
         CreateConversationRequest.builder()
@@ -114,8 +114,8 @@ public class DeleteConversationTests {
             .build();
     responseMap = createConversation(jwtToken, createConversationRequest);
     SoftAssert softAssert = new SoftAssert();
-    CreateConversationResponse conversationResponse = (CreateConversationResponse) responseMap.get(
-        "response");
+    CreateConversationResponse conversationResponse =
+        (CreateConversationResponse) responseMap.get("response");
     softAssert.assertNotNull(conversationResponse.getId());
     softAssert.assertNotNull(conversationResponse.getHref());
     ApiRequestBuilder deleteConversationBuilder =
@@ -141,7 +141,7 @@ public class DeleteConversationTests {
 
   @DataProvider(name = "conversationIdNotFoundDataProvider")
   public Object[][] conversationIdNotFoundDataProvider() {
-    return new Object[][]{{null}, {"xyz"}, {true}, {1}, {1.01}};
+    return new Object[][] {{null}, {"xyz"}, {true}, {1}, {1.01}};
   }
 
   @Test(
@@ -149,44 +149,42 @@ public class DeleteConversationTests {
       dataProvider = "conversationIdNotFoundDataProvider")
   public void deleteConversationWithConversationIdNotFound(Object conversationId) {
     ApiRequestBuilder deleteConversationBuilder =
-        DeleteConversationApiHelper.deleteConversationBuilder(DELETE, 404, jwtToken, conversationId);
-    Response deleteConversationResponse = RestAssuredUtils.processApiRequest(
-        deleteConversationBuilder);
+        DeleteConversationApiHelper.deleteConversationBuilder(
+            DELETE, 404, jwtToken, conversationId);
+    Response deleteConversationResponse =
+        RestAssuredUtils.processApiRequest(deleteConversationBuilder);
     ErrorResponse response = deleteConversationResponse.as(ErrorResponse.class);
     assertValidationFail(response, INVALID_CONVERSATION_ID);
   }
 
-  @Test(
-      description = "NC-delete Conversation with invalid conversationId-not found")
+  @Test(description = "NC-delete Conversation with invalid conversationId-not found")
   public void deleteConversationWithIncorrectHttpMethodPOST() {
     ApiRequestBuilder deleteConversationBuilder =
         DeleteConversationApiHelper.deleteConversationBuilder(POST, 405, jwtToken, "test");
-    Response deleteConversationResponse = RestAssuredUtils.processApiRequest(
-        deleteConversationBuilder);
+    Response deleteConversationResponse =
+        RestAssuredUtils.processApiRequest(deleteConversationBuilder);
     ErrorResponse response = deleteConversationResponse.as(ErrorResponse.class);
     assertValidationFail(response, INCORRECT_HTTP_METHODS);
   }
 
-  @Test(
-      description = "NC-Delete Conversation with invalidToken")
+  @Test(description = "NC-Delete Conversation with invalidToken")
   public void getConversationTokenInvalid() {
     ApiRequestBuilder deleteConversationBuilder =
         DeleteConversationApiHelper.deleteConversationBuilder(DELETE, 401, INVALID_TOKEN, "test");
-    Response deleteConversationResponse = RestAssuredUtils.processApiRequest(
-        deleteConversationBuilder);
+    Response deleteConversationResponse =
+        RestAssuredUtils.processApiRequest(deleteConversationBuilder);
     ErrorResponse response = deleteConversationResponse.as(ErrorResponse.class);
     SoftAssert softAssert = new SoftAssert();
     assertValidationFail(response, TOKEN_INVALID_ERROR);
     softAssert.assertAll();
   }
 
-  @Test(
-      description = "NC-delete Conversation with tokenExpired")
+  @Test(description = "NC-delete Conversation with tokenExpired")
   public void getConversationTokenExpired() {
     ApiRequestBuilder deleteConversationBuilder =
         DeleteConversationApiHelper.deleteConversationBuilder(DELETE, 401, EXPIRED_TOKEN, "test");
-    Response deleteConversationResponse = RestAssuredUtils.processApiRequest(
-        deleteConversationBuilder);
+    Response deleteConversationResponse =
+        RestAssuredUtils.processApiRequest(deleteConversationBuilder);
     ErrorResponse response = deleteConversationResponse.as(ErrorResponse.class);
     SoftAssert softAssert = new SoftAssert();
     assertValidationFail(response, TOKEN_EXPIRED_ERROR);

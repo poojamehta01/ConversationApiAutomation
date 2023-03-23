@@ -63,8 +63,9 @@ public class GetConversationTests {
             .generate();
   }
 
-
-  @Test(description = "PC-get Conversation with valid conversationId with all the fields in createConversation Payload")
+  @Test(
+      description =
+          "PC-get Conversation with valid conversationId with all the fields in createConversation Payload")
   public void getConversationWithConversationIdValid() {
     SoftAssert softAssert = new SoftAssert();
     CreateConversationRequest createConversationRequest =
@@ -75,8 +76,10 @@ public class GetConversationTests {
             .properties(PropertiesObj.builder().ttl(60).build())
             .build();
     responseMap = createConversation(jwtToken, createConversationRequest);
-    CreateConversationResponse conversationResponse = (CreateConversationResponse) responseMap.get("response");
-    CreateConversationRequest conversationRequest = (CreateConversationRequest) responseMap.get("request");
+    CreateConversationResponse conversationResponse =
+        (CreateConversationResponse) responseMap.get("response");
+    CreateConversationRequest conversationRequest =
+        (CreateConversationRequest) responseMap.get("request");
 
     softAssert.assertNotNull(conversationResponse.getId());
     softAssert.assertNotNull(conversationResponse.getHref());
@@ -87,11 +90,13 @@ public class GetConversationTests {
     GetConversationApiResponse response =
         getConversationResponse.as(GetConversationApiResponse.class);
     softAssert.assertEquals(response.getUuid(), conversationResponse.getId());
-    softAssert.assertEquals(response.getName(),conversationRequest.getName().toString());
-    softAssert.assertEquals(response.getDisplay_name(),conversationRequest.getDisplay_name().toString());
-    softAssert.assertEquals(response.getImage_url(),conversationRequest.getImage_url().toString());
+    softAssert.assertEquals(response.getName(), conversationRequest.getName().toString());
+    softAssert.assertEquals(
+        response.getDisplay_name(), conversationRequest.getDisplay_name().toString());
+    softAssert.assertEquals(response.getImage_url(), conversationRequest.getImage_url().toString());
     softAssert.assertEquals(response.getState(), "ACTIVE");
-    softAssert.assertEquals(response.getProperties(),conversationRequest.getProperties().toString());
+    softAssert.assertEquals(
+        response.getProperties(), conversationRequest.getProperties().toString());
     softAssert.assertEquals(
         response.get_links().getSelf().getHref(), conversationResponse.getHref());
   }
@@ -108,7 +113,8 @@ public class GetConversationTests {
             .build();
     responseMap = createConversation(jwtToken, createConversationRequest);
     SoftAssert softAssert = new SoftAssert();
-    CreateConversationResponse conversationResponse = (CreateConversationResponse) responseMap.get("response");
+    CreateConversationResponse conversationResponse =
+        (CreateConversationResponse) responseMap.get("response");
     softAssert.assertNotNull(conversationResponse.getId());
     softAssert.assertNotNull(conversationResponse.getHref());
     ApiRequestBuilder getConversationBuilder =
@@ -132,13 +138,11 @@ public class GetConversationTests {
     assertValidationFail(response, INVALID_CONVERSATION_ID);
   }
 
-  @Test(
-      description = "NC-get Conversation with conversationId empty")
+  @Test(description = "NC-get Conversation with conversationId empty")
   public void getConversationWithIdEmptyId() {
     SoftAssert softAssert = new SoftAssert();
     ApiRequestBuilder getConversationBuilder =
-        GetConversationApiHelper.getConversationBuilder(
-            GET, 400, jwtToken, "");
+        GetConversationApiHelper.getConversationBuilder(GET, 400, jwtToken, "");
     Response getConversationResponse = RestAssuredUtils.processApiRequest(getConversationBuilder);
     ErrorResponse response = getConversationResponse.as(ErrorResponse.class);
     assertValidationFail(response, EMPTY_CONVERSATION_ID);
@@ -150,7 +154,7 @@ public class GetConversationTests {
 
   @DataProvider(name = "conversationIdNotFoundDataProvider")
   public Object[][] getConversationIdNotFoundDataProvider() {
-    return new Object[][] {{null}, {"xyz"}, {true}, {1},{1.01}};
+    return new Object[][] {{null}, {"xyz"}, {true}, {1}, {1.01}};
   }
 
   @Test(
@@ -164,8 +168,7 @@ public class GetConversationTests {
     assertValidationFail(response, INVALID_CONVERSATION_ID);
   }
 
-  @Test(
-      description = "NC-get Conversation with invalid method post")
+  @Test(description = "NC-get Conversation with invalid method post")
   public void getConversationWithIncorrectHttpMethodPOST() {
     ApiRequestBuilder getConversationBuilder =
         GetConversationApiHelper.getConversationBuilder(POST, 405, jwtToken, "test");
@@ -176,8 +179,7 @@ public class GetConversationTests {
     softAssert.assertAll();
   }
 
-  @Test(
-      description = "NC-get Conversation with invalidToken")
+  @Test(description = "NC-get Conversation with invalidToken")
   public void getConversationTokenInvalid() {
     ApiRequestBuilder getConversationBuilder =
         GetConversationApiHelper.getConversationBuilder(GET, 401, INVALID_TOKEN, "test");
@@ -188,8 +190,7 @@ public class GetConversationTests {
     softAssert.assertAll();
   }
 
-  @Test(
-      description = "NC-get Conversation with tokenExpired")
+  @Test(description = "NC-get Conversation with tokenExpired")
   public void getConversationTokenExpired() {
     ApiRequestBuilder getConversationBuilder =
         GetConversationApiHelper.getConversationBuilder(GET, 401, EXPIRED_TOKEN, "test");

@@ -56,8 +56,8 @@ public enum CreateConversationEnums {
 
   EMPTY_CONVERSATION_ID(
       "Input validation failure.",
-          "\"conversation_id\" is not allowed to be empty",
-          "http:error:validation-fail");
+      "\"conversation_id\" is not allowed to be empty",
+      "http:error:validation-fail");
 
   @Getter private final String description;
   @Getter private final String error;

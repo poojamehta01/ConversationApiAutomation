@@ -1,12 +1,6 @@
 
-j
-:src/main/java/com/api/automation/utils/PropertiesUtil.java,0/1/01921dcc70ab922e4c487a17d100c7a97870b5be
 T
 $src/main/resources/config.properties,f/a/fac4e92d770a0a6287eaad0e53c4efa350987f47
-q
-Asrc/main/java/com/api/automation/constants/EndPointConstants.java,9/d/9db137345c54efae6ad1b44ed13e28dca45f5474
-o
-?src/main/java/com/api/automation/constants/CommonConstants.java,e/d/ed4ec9d7c6983fb7e521f961dd4c86d44eb35cd0
 
 Osrc/main/java/com/api/automation/pojos/response/CreateConversationResponse.java,e/1/e1761d59aa0215cf866e18777065a7342c90728b
 r

@@ -13,9 +13,9 @@ import static com.api.automation.enums.conversation.CreateConversationEnums.DATA
 import static com.api.automation.enums.conversation.CreateConversationEnums.DUPLICATE_NAME_ERROR;
 import static com.api.automation.enums.conversation.CreateConversationEnums.EMPTY_DISPLAY_NAME;
 import static com.api.automation.enums.conversation.CreateConversationEnums.INCORRECT_HTTP_METHODS;
+import static com.api.automation.enums.conversation.CreateConversationEnums.INCORRECT_KEY;
 import static com.api.automation.enums.conversation.CreateConversationEnums.INCORRECT_URL;
 import static com.api.automation.enums.conversation.CreateConversationEnums.PROPERTY_DATATYPE_INCORRECT;
-import static com.api.automation.enums.conversation.CreateConversationEnums.INCORRECT_KEY;
 import static com.api.automation.enums.conversation.CreateConversationEnums.TOKEN_EXPIRED_ERROR;
 import static com.api.automation.enums.conversation.CreateConversationEnums.TOKEN_INVALID_ERROR;
 import static com.api.automation.enums.conversation.CreateConversationEnums.TTL_DATATYPE_INCORRECT;
@@ -226,7 +226,8 @@ public class CreateConversationNegativeTests extends BaseTest {
     System.out.println(response);
     assertValidationFail(response, INCORRECT_KEY);
     softAssert.assertEquals(
-        response.getError().getIncorrectKey().get(0), INCORRECT_KEY.getError().replace("$KEYNAME","incorrectKey"));
+        response.getError().getIncorrectKey().get(0),
+        INCORRECT_KEY.getError().replace("$KEYNAME", "incorrectKey"));
 
     softAssert.assertAll();
   }
@@ -255,9 +256,7 @@ public class CreateConversationNegativeTests extends BaseTest {
       assertValidationFail(response, TTL_DATATYPE_INCORRECT);
     } else if (ttl.equals(-1)) {
       assertValidationFail(response, TTL_LESS_THAN_ZERO);
-      softAssert.assertEquals(
-          response.getError().getTtl().get(0), TTL_LESS_THAN_ZERO.getError());
-
+      softAssert.assertEquals(response.getError().getTtl().get(0), TTL_LESS_THAN_ZERO.getError());
 
     } else if (ttl.equals("10000000000000000")) {
       assertValidationFail(response, TTL_NOT_SAFE_NUM);
@@ -321,10 +320,7 @@ public class CreateConversationNegativeTests extends BaseTest {
             .build();
     ApiRequestBuilder createConversationBuilder =
         CreateConversationApiHelper.createConversationBuilder(
-            POST,
-            401,
-            createConversationRequest,
-            EXPIRED_TOKEN);
+            POST, 401, createConversationRequest, EXPIRED_TOKEN);
     Response createConversationResponse =
         RestAssuredUtils.processApiRequest(createConversationBuilder);
     ErrorResponse response = createConversationResponse.as(ErrorResponse.class);

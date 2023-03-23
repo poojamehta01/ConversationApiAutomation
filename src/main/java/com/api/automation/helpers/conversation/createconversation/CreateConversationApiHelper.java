@@ -2,15 +2,10 @@ package com.api.automation.helpers.conversation.createconversation;
 
 import static com.api.automation.constants.CommonConstants.BASE_URL;
 import static com.api.automation.constants.EndPointConstants.CONVERSATION_ENDPOINT;
-import static com.api.automation.constants.conversation.CreateConversationConstants.DISPLAY_NAME;
-import static com.api.automation.constants.conversation.CreateConversationConstants.DUPLICATE_NAME;
-import static com.api.automation.constants.conversation.CreateConversationConstants.IMAGE_URL;
 import static com.api.automation.helpers.CommonTestHelper.getJsonString;
-import static com.api.automation.helpers.CommonTestHelper.randomRegex;
 import static io.restassured.http.Method.POST;
 
 import com.api.automation.pojos.requests.conversation.createconversation.CreateConversationRequest;
-import com.api.automation.pojos.requests.conversation.createconversation.CreateConversationRequest.PropertiesObj;
 import com.api.automation.pojos.requests.conversation.createconversation.CreateConversationRequestIncorrectKey;
 import com.api.automation.pojos.response.conversation.CreateConversationResponse;
 import com.api.automation.utils.ApiRequestBuilder;
@@ -70,12 +65,12 @@ public class CreateConversationApiHelper {
         .build();
   }
 
-  public static Map<String, Object> createConversation(String jwtToken,CreateConversationRequest createConversationRequest) {
+  public static Map<String, Object> createConversation(
+      String jwtToken, CreateConversationRequest createConversationRequest) {
     ApiRequestBuilder createConversationBuilder =
         CreateConversationApiHelper.createConversationBuilder(
             POST, 200, createConversationRequest, jwtToken);
-    Response response =
-        RestAssuredUtils.processApiRequest(createConversationBuilder);
+    Response response = RestAssuredUtils.processApiRequest(createConversationBuilder);
     CreateConversationResponse createConversationResponse =
         response.as(CreateConversationResponse.class);
     Map<String, Object> responseMap = new HashMap<>();
@@ -83,7 +78,4 @@ public class CreateConversationApiHelper {
     responseMap.put("response", createConversationResponse);
     return responseMap;
   }
-
-
-
 }
