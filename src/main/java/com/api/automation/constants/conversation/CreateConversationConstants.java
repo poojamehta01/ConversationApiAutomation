@@ -1,10 +1,10 @@
-package com.api.automation.constants;
+package com.api.automation.constants.conversation;
 
 import static com.api.automation.helpers.CommonTestHelper.randomName;
 import static com.api.automation.helpers.CommonTestHelper.randomRegex;
 import static com.api.automation.helpers.CommonTestHelper.randomUri;
 
-public class ConversationApiConstants {
+public class CreateConversationConstants {
 
   public static final String DUPLICATE_NAME = "test_" + randomRegex("[a-z0-9]{21}");
   public static final String NAME_ERROR = "test_" + randomRegex("[a-z0-9][@#$!]{21}");

@@ -18,5 +18,6 @@ public class CreateConversationRequest {
   @Builder
   @JsonIgnoreProperties(ignoreUnknown = true)
   public static class PropertiesObj {
-    public Object ttl;}
+    public Object ttl;
+  }
 }

@@ -2,19 +2,19 @@ package com.api.automation.conversation.createconversation;
 
 import static com.api.automation.constants.CommonConstants.APP_ID;
 import static com.api.automation.constants.CommonConstants.PRIVATE_KEY;
-import static com.api.automation.constants.ConversationApiConstants.DISPLAY_NAME;
-import static com.api.automation.constants.ConversationApiConstants.HREF;
-import static com.api.automation.constants.ConversationApiConstants.IMAGE_URL;
-import static com.api.automation.constants.ConversationApiConstants.TTL;
+import static com.api.automation.constants.conversation.CreateConversationConstants.DISPLAY_NAME;
+import static com.api.automation.constants.conversation.CreateConversationConstants.HREF;
+import static com.api.automation.constants.conversation.CreateConversationConstants.IMAGE_URL;
+import static com.api.automation.constants.conversation.CreateConversationConstants.TTL;
 import static com.api.automation.helpers.CommonTestHelper.randomRegex;
 import static io.restassured.http.Method.POST;
 
 import com.api.automation.BaseTest;
-import com.api.automation.helpers.ConversationApiHelper;
-import com.api.automation.helpers.CreateConversationDataProviderHelper;
-import com.api.automation.pojos.requests.CreateConversationRequest;
-import com.api.automation.pojos.requests.CreateConversationRequest.PropertiesObj;
-import com.api.automation.pojos.response.CreateConversationResponse;
+import com.api.automation.helpers.conversation.createconversation.CreateConversationApiHelper;
+import com.api.automation.helpers.conversation.createconversation.CreateConversationDataProviderHelper;
+import com.api.automation.pojos.requests.conversation.createconversation.CreateConversationRequest;
+import com.api.automation.pojos.requests.conversation.createconversation.CreateConversationRequest.PropertiesObj;
+import com.api.automation.pojos.response.conversation.CreateConversationResponse;
 import com.api.automation.utils.ApiRequestBuilder;
 import com.api.automation.utils.RestAssuredUtils;
 import com.vonage.jwt.Jwt;
@@ -58,7 +58,7 @@ public class CreateConversationPositiveTests extends BaseTest {
             .properties(PropertiesObj.builder().ttl(TTL).build())
             .build();
     ApiRequestBuilder createConversationBuilder =
-        ConversationApiHelper.createConversationBuilder(
+        CreateConversationApiHelper.createConversationBuilder(
             POST, 200, createConversationRequest, jwtToken);
     Response createConversationResponse =
         RestAssuredUtils.processApiRequest(createConversationBuilder);
@@ -76,7 +76,7 @@ public class CreateConversationPositiveTests extends BaseTest {
   public void createConversationWithEmptyPayload() {
 
     ApiRequestBuilder createConversationBuilder =
-        ConversationApiHelper.createConversationBuilder(POST, 200, jwtToken);
+        CreateConversationApiHelper.createConversationBuilder(POST, 200, jwtToken);
     Response createConversationResponse =
         RestAssuredUtils.processApiRequest(createConversationBuilder);
     CreateConversationResponse response =
@@ -103,7 +103,7 @@ public class CreateConversationPositiveTests extends BaseTest {
             .properties(PropertiesObj.builder().ttl(TTL).build())
             .build();
     ApiRequestBuilder createConversationBuilder =
-        ConversationApiHelper.createConversationBuilder(
+        CreateConversationApiHelper.createConversationBuilder(
             POST, 200, createConversationRequest, jwtToken);
     Response createConversationResponse =
         RestAssuredUtils.processApiRequest(createConversationBuilder);
@@ -130,7 +130,7 @@ public class CreateConversationPositiveTests extends BaseTest {
             .properties(PropertiesObj.builder().ttl(TTL).build())
             .build();
     ApiRequestBuilder createConversationBuilder =
-        ConversationApiHelper.createConversationBuilder(
+        CreateConversationApiHelper.createConversationBuilder(
             POST, 200, createConversationRequest, jwtToken);
     Response createConversationResponse =
         RestAssuredUtils.processApiRequest(createConversationBuilder);
@@ -153,7 +153,7 @@ public class CreateConversationPositiveTests extends BaseTest {
             .properties(PropertiesObj.builder().ttl(1).build())
             .build();
     ApiRequestBuilder createConversationBuilder =
-        ConversationApiHelper.createConversationBuilder(
+        CreateConversationApiHelper.createConversationBuilder(
             POST, 200, createConversationRequest, jwtToken);
     Response createConversationResponse =
         RestAssuredUtils.processApiRequest(createConversationBuilder);
@@ -180,7 +180,7 @@ public class CreateConversationPositiveTests extends BaseTest {
             .properties(PropertiesObj.builder().ttl(ttl).build())
             .build();
     ApiRequestBuilder createConversationBuilder =
-        ConversationApiHelper.createConversationBuilder(
+        CreateConversationApiHelper.createConversationBuilder(
             POST, 200, createConversationRequest, jwtToken);
     Response createConversationResponse =
         RestAssuredUtils.processApiRequest(createConversationBuilder);
@@ -193,5 +193,4 @@ public class CreateConversationPositiveTests extends BaseTest {
     softAssert.assertTrue(response.getHref().equals(HREF + response.getId()));
     softAssert.assertAll();
   }
-
 }

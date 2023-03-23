@@ -1,36 +1,38 @@
 package com.api.automation.conversation.createconversation;
 
 import static com.api.automation.constants.CommonConstants.APP_ID;
+import static com.api.automation.constants.CommonConstants.EXPIRED_TOKEN;
+import static com.api.automation.constants.CommonConstants.INVALID_TOKEN;
 import static com.api.automation.constants.CommonConstants.PRIVATE_KEY;
-import static com.api.automation.constants.ConversationApiConstants.DISPLAY_NAME;
-import static com.api.automation.constants.ConversationApiConstants.DUPLICATE_NAME;
-import static com.api.automation.constants.ConversationApiConstants.IMAGE_URL;
-import static com.api.automation.constants.ConversationApiConstants.NAME_ERROR;
-import static com.api.automation.constants.ConversationApiConstants.TTL;
-import static com.api.automation.enums.ErrorEnums.DATATYPE_INCORRECT;
-import static com.api.automation.enums.ErrorEnums.DUPLICATE_NAME_ERROR;
-import static com.api.automation.enums.ErrorEnums.EMPTY_DISPLAY_NAME;
-import static com.api.automation.enums.ErrorEnums.INCORRECT_HTTP_METHODS;
-import static com.api.automation.enums.ErrorEnums.INCORRECT_URL;
-import static com.api.automation.enums.ErrorEnums.PROPERTY_DATATYPE_INCORRECT;
-import static com.api.automation.enums.ErrorEnums.PROPERTY_INCORRECT_KEY;
-import static com.api.automation.enums.ErrorEnums.TOKEN_EXPIRED;
-import static com.api.automation.enums.ErrorEnums.TOKEN_INVALID;
-import static com.api.automation.enums.ErrorEnums.TTL_DATATYPE_INCORRECT;
-import static com.api.automation.enums.ErrorEnums.TTL_LESS_THAN_ZERO;
-import static com.api.automation.enums.ErrorEnums.TTL_NOT_SAFE_NUM;
+import static com.api.automation.constants.conversation.CreateConversationConstants.DISPLAY_NAME;
+import static com.api.automation.constants.conversation.CreateConversationConstants.DUPLICATE_NAME;
+import static com.api.automation.constants.conversation.CreateConversationConstants.IMAGE_URL;
+import static com.api.automation.constants.conversation.CreateConversationConstants.NAME_ERROR;
+import static com.api.automation.constants.conversation.CreateConversationConstants.TTL;
+import static com.api.automation.enums.conversation.CreateConversationEnums.DATATYPE_INCORRECT;
+import static com.api.automation.enums.conversation.CreateConversationEnums.DUPLICATE_NAME_ERROR;
+import static com.api.automation.enums.conversation.CreateConversationEnums.EMPTY_DISPLAY_NAME;
+import static com.api.automation.enums.conversation.CreateConversationEnums.INCORRECT_HTTP_METHODS;
+import static com.api.automation.enums.conversation.CreateConversationEnums.INCORRECT_URL;
+import static com.api.automation.enums.conversation.CreateConversationEnums.PROPERTY_DATATYPE_INCORRECT;
+import static com.api.automation.enums.conversation.CreateConversationEnums.INCORRECT_KEY;
+import static com.api.automation.enums.conversation.CreateConversationEnums.TOKEN_EXPIRED_ERROR;
+import static com.api.automation.enums.conversation.CreateConversationEnums.TOKEN_INVALID_ERROR;
+import static com.api.automation.enums.conversation.CreateConversationEnums.TTL_DATATYPE_INCORRECT;
+import static com.api.automation.enums.conversation.CreateConversationEnums.TTL_LESS_THAN_ZERO;
+import static com.api.automation.enums.conversation.CreateConversationEnums.TTL_NOT_SAFE_NUM;
 import static com.api.automation.helpers.CommonTestHelper.randomRegex;
 import static io.restassured.http.Method.POST;
 
 import com.api.automation.BaseTest;
-import com.api.automation.enums.ErrorEnums;
-import com.api.automation.helpers.ConversationApiHelper;
-import com.api.automation.helpers.CreateConversationDataProviderHelper;
-import com.api.automation.pojos.requests.CreateConversationRequest;
-import com.api.automation.pojos.requests.CreateConversationRequest.PropertiesObj;
-import com.api.automation.pojos.requests.CreateConversationRequestIncorrectKey;
-import com.api.automation.pojos.requests.CreateConversationRequestIncorrectKey.PropertiesObjIncorrect;
-import com.api.automation.pojos.response.ErrorResponse;
+import com.api.automation.enums.conversation.CreateConversationEnums;
+import com.api.automation.helpers.conversation.createconversation.CreateConversationApiHelper;
+import com.api.automation.helpers.conversation.createconversation.CreateConversationDataProviderHelper;
+import com.api.automation.pojos.requests.conversation.createconversation.CreateConversationRequest;
+import com.api.automation.pojos.requests.conversation.createconversation.CreateConversationRequest.PropertiesObj;
+import com.api.automation.pojos.requests.conversation.createconversation.CreateConversationRequestIncorrectKey;
+import com.api.automation.pojos.requests.conversation.createconversation.CreateConversationRequestIncorrectKey.PropertiesObjIncorrect;
+import com.api.automation.pojos.response.conversation.ErrorResponse;
 import com.api.automation.utils.ApiRequestBuilder;
 import com.api.automation.utils.RestAssuredUtils;
 import com.vonage.jwt.Jwt;
@@ -64,7 +66,8 @@ public class CreateConversationNegativeTests extends BaseTest {
             .generate();
   }
 
-  @Test(description = "NC-create Conversation with NAME null,boolean,number,double,array",
+  @Test(
+      description = "NC-create Conversation with NAME null,boolean,number,double,array",
       dataProvider = "conversationApi_dataProvider",
       dataProviderClass = CreateConversationDataProviderHelper.class)
   public void createConversationNameInValid(Object name) {
@@ -76,7 +79,7 @@ public class CreateConversationNegativeTests extends BaseTest {
             .properties(PropertiesObj.builder().ttl(1).build())
             .build();
     ApiRequestBuilder createConversationBuilder =
-        ConversationApiHelper.createConversationBuilder(
+        CreateConversationApiHelper.createConversationBuilder(
             POST, 400, createConversationRequest, jwtToken);
     Response errorResponse = RestAssuredUtils.processApiRequest(createConversationBuilder);
     ErrorResponse response = errorResponse.as(ErrorResponse.class);
@@ -90,7 +93,14 @@ public class CreateConversationNegativeTests extends BaseTest {
 
   @Test(description = "NC-create Conversation duplicate NAME")
   public void createConversationDuplicateName() {
-    ConversationApiHelper.createConversation(jwtToken);
+    CreateConversationRequest createConversationRequestOld =
+        CreateConversationRequest.builder()
+            .display_name(DISPLAY_NAME)
+            .name(DUPLICATE_NAME)
+            .image_url(IMAGE_URL)
+            .properties(PropertiesObj.builder().ttl(1).build())
+            .build();
+    CreateConversationApiHelper.createConversation(jwtToken, createConversationRequestOld);
     PropertiesObj prop = PropertiesObj.builder().ttl(60).build();
     CreateConversationRequest createConversationRequest =
         CreateConversationRequest.builder()
@@ -100,7 +110,7 @@ public class CreateConversationNegativeTests extends BaseTest {
             .properties(prop)
             .build();
     ApiRequestBuilder createConversationBuilder =
-        ConversationApiHelper.createConversationBuilder(
+        CreateConversationApiHelper.createConversationBuilder(
             POST, 400, createConversationRequest, jwtToken);
     Response createConversationResponse =
         RestAssuredUtils.processApiRequest(createConversationBuilder);
@@ -110,7 +120,9 @@ public class CreateConversationNegativeTests extends BaseTest {
     softAssert.assertAll();
   }
 
-  @Test(description = "NC-create Conversation DISPLAY_NAME empty,boolean,number,double,array", dataProvider = "conversationApi_dataProvider",
+  @Test(
+      description = "NC-create Conversation DISPLAY_NAME empty,boolean,number,double,array",
+      dataProvider = "conversationApi_dataProvider",
       dataProviderClass = CreateConversationDataProviderHelper.class)
   public void createConversationDisplayNameInvalid(Object displayName) {
     CreateConversationRequest createConversationRequest =
@@ -121,7 +133,7 @@ public class CreateConversationNegativeTests extends BaseTest {
             .properties(PropertiesObj.builder().ttl(TTL).build())
             .build();
     ApiRequestBuilder createConversationBuilder =
-        ConversationApiHelper.createConversationBuilder(
+        CreateConversationApiHelper.createConversationBuilder(
             POST, 400, createConversationRequest, jwtToken);
     Response createConversationResponse =
         RestAssuredUtils.processApiRequest(createConversationBuilder);
@@ -138,13 +150,13 @@ public class CreateConversationNegativeTests extends BaseTest {
       softAssert.assertEquals(
           response.getError().getDisplay_name().get(0),
           DATATYPE_INCORRECT.getError().replace("$KEYNAME", "display_name"));
-
     }
     softAssert.assertAll();
   }
 
   @Test(
-      description = "NC-create Conversation with ImageUrl with whiteSpace, randomString, null, empty,boolean,number,double,array",
+      description =
+          "NC-create Conversation with ImageUrl with whiteSpace, randomString, null, empty,boolean,number,double,array",
       dataProvider = "conversationApi_dataProvider",
       dataProviderClass = CreateConversationDataProviderHelper.class)
   public void createConversationImageUrlInValid(Object imageUrl) {
@@ -156,7 +168,7 @@ public class CreateConversationNegativeTests extends BaseTest {
             .properties(PropertiesObj.builder().ttl(1).build())
             .build();
     ApiRequestBuilder createConversationBuilder =
-        ConversationApiHelper.createConversationBuilder(
+        CreateConversationApiHelper.createConversationBuilder(
             POST, 400, createConversationRequest, jwtToken);
     Response createConversationResponse =
         RestAssuredUtils.processApiRequest(createConversationBuilder);
@@ -184,7 +196,7 @@ public class CreateConversationNegativeTests extends BaseTest {
             .properties(null)
             .build();
     ApiRequestBuilder createConversationBuilder =
-        ConversationApiHelper.createConversationBuilder(
+        CreateConversationApiHelper.createConversationBuilder(
             POST, 400, createConversationRequest, jwtToken);
     Response createConversationResponse =
         RestAssuredUtils.processApiRequest(createConversationBuilder);
@@ -194,9 +206,7 @@ public class CreateConversationNegativeTests extends BaseTest {
     softAssert.assertAll();
   }
 
-  @Test(
-      description =
-          "NC-create Conversation with incorrectKey in properties")
+  @Test(description = "NC-create Conversation with incorrectKey in properties")
   public void createConversationPropertyWithIncorrectKey() {
     CreateConversationRequestIncorrectKey createConversationRequest =
         CreateConversationRequestIncorrectKey.builder()
@@ -206,7 +216,7 @@ public class CreateConversationNegativeTests extends BaseTest {
             .properties(PropertiesObjIncorrect.builder().incorrectKey(0).build())
             .build();
     ApiRequestBuilder createConversationBuilder =
-        ConversationApiHelper.createConversationBuilder(
+        CreateConversationApiHelper.createConversationBuilder(
             POST, 400, createConversationRequest, jwtToken);
     Response createConversationResponse =
         RestAssuredUtils.processApiRequest(createConversationBuilder);
@@ -214,9 +224,9 @@ public class CreateConversationNegativeTests extends BaseTest {
     SoftAssert softAssert = new SoftAssert();
     System.out.println("this is the response!!");
     System.out.println(response);
-    assertValidationFail(response, PROPERTY_INCORRECT_KEY);
+    assertValidationFail(response, INCORRECT_KEY);
     softAssert.assertEquals(
-        response.getError().getIncorrectKey().get(0), PROPERTY_INCORRECT_KEY.getError());
+        response.getError().getIncorrectKey().get(0), INCORRECT_KEY.getError().replace("$KEYNAME","incorrectKey"));
 
     softAssert.assertAll();
   }
@@ -234,7 +244,7 @@ public class CreateConversationNegativeTests extends BaseTest {
             .properties(PropertiesObj.builder().ttl(ttl).build())
             .build();
     ApiRequestBuilder createConversationBuilder =
-        ConversationApiHelper.createConversationBuilder(
+        CreateConversationApiHelper.createConversationBuilder(
             POST, 400, createConversationRequest, jwtToken);
     Response createConversationResponse =
         RestAssuredUtils.processApiRequest(createConversationBuilder);
@@ -245,6 +255,10 @@ public class CreateConversationNegativeTests extends BaseTest {
       assertValidationFail(response, TTL_DATATYPE_INCORRECT);
     } else if (ttl.equals(-1)) {
       assertValidationFail(response, TTL_LESS_THAN_ZERO);
+      softAssert.assertEquals(
+          response.getError().getTtl().get(0), TTL_LESS_THAN_ZERO.getError());
+
+
     } else if (ttl.equals("10000000000000000")) {
       assertValidationFail(response, TTL_NOT_SAFE_NUM);
     } else {
@@ -252,7 +266,6 @@ public class CreateConversationNegativeTests extends BaseTest {
     }
     softAssert.assertAll();
   }
-
 
   @Test(
       description = "NC-create Conversation with incorrect http method, other than post",
@@ -267,7 +280,7 @@ public class CreateConversationNegativeTests extends BaseTest {
             .properties(PropertiesObj.builder().ttl(TTL).build())
             .build();
     ApiRequestBuilder createConversationBuilder =
-        ConversationApiHelper.createConversationBuilder(
+        CreateConversationApiHelper.createConversationBuilder(
             method, 405, createConversationRequest, jwtToken);
     Response createConversationResponse =
         RestAssuredUtils.processApiRequest(createConversationBuilder);
@@ -287,12 +300,13 @@ public class CreateConversationNegativeTests extends BaseTest {
             .properties(PropertiesObj.builder().ttl(1).build())
             .build();
     ApiRequestBuilder createConversationBuilder =
-        ConversationApiHelper.createConversationBuilder(POST, 401, createConversationRequest, "");
+        CreateConversationApiHelper.createConversationBuilder(
+            POST, 401, createConversationRequest, INVALID_TOKEN);
     Response createConversationResponse =
         RestAssuredUtils.processApiRequest(createConversationBuilder);
     ErrorResponse response = createConversationResponse.as(ErrorResponse.class);
     SoftAssert softAssert = new SoftAssert();
-    assertValidationFail(response, TOKEN_INVALID);
+    assertValidationFail(response, TOKEN_INVALID_ERROR);
     softAssert.assertAll();
   }
 
@@ -306,20 +320,20 @@ public class CreateConversationNegativeTests extends BaseTest {
             .properties(PropertiesObj.builder().ttl(1).build())
             .build();
     ApiRequestBuilder createConversationBuilder =
-        ConversationApiHelper.createConversationBuilder(
+        CreateConversationApiHelper.createConversationBuilder(
             POST,
             401,
             createConversationRequest,
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2Nzk0Njc3NTgsImV4cCI6MTY3OTQ4OTM1OCwianRpIjoiQjJ3Zzc5cUFJQ2pBIiwiYXBwbGljYXRpb25faWQiOiI0OTYyZjQ3NC0xYzA3LTQxYmYtYmZmYi0xM2MzMjRhY2QzNGUiLCJzdWIiOiIiLCJhY2wiOiIifQ.TLNOFOYbM-9BcMV0D94Lu5OYw7hOKVcQbdHJppXvq7HTjsquOeHmcStctp1F-4byfTw2L6phkG_boXtatrVUR8W6YJqlHhoJ1bqOuWtCpa-ZiGhaez3j5MaKJ1qwfDSvH4N8QA3thF7OSEvhGzPcT_jthQHx5kY-_PP3jtkMavG6bmFlNMmEkrN5_47O2YxhO2FsAORn6kY1IDtPS6Lzxoqg9-OEc6UFFcdl5cexkmDNKGwJ-Cl69Vn4LXwVIvIucth9bAwgNG2U3ubVq6y-2oCKu10EbbwpbheG2sqqJAsHb9aLq_GxQTQkHBLaauxiWjD8bDhRd0TMh07GSLlexw");
+            EXPIRED_TOKEN);
     Response createConversationResponse =
         RestAssuredUtils.processApiRequest(createConversationBuilder);
     ErrorResponse response = createConversationResponse.as(ErrorResponse.class);
     SoftAssert softAssert = new SoftAssert();
-    assertValidationFail(response, TOKEN_EXPIRED);
+    assertValidationFail(response, TOKEN_EXPIRED_ERROR);
     softAssert.assertAll();
   }
 
-  public void assertValidationFail(ErrorResponse response, ErrorEnums enums) {
+  private void assertValidationFail(ErrorResponse response, CreateConversationEnums enums) {
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertEquals(response.getDescription(), enums.getDescription());
     softAssert.assertEquals(response.getCode(), enums.getCode());

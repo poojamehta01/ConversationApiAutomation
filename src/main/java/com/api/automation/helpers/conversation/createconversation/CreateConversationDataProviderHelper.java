@@ -1,6 +1,5 @@
-package com.api.automation.helpers;
+package com.api.automation.helpers.conversation.createconversation;
 
-import static com.api.automation.helpers.CommonTestHelper.randomNumber;
 import static com.api.automation.helpers.CommonTestHelper.randomRegex;
 import static io.restassured.http.Method.DELETE;
 import static io.restassured.http.Method.PATCH;
@@ -16,33 +15,28 @@ public class CreateConversationDataProviderHelper {
     int[] arr = {};
     switch (m.getName()) {
       case "createConversationNameValid":
-        return new Object[][]{{""}, {"   "}, {"test_" + randomRegex("[a-z0-9]{101}")}};
+        return new Object[][] {{""}, {"   "}, {"test_" + randomRegex("[a-z0-9]{101}")}};
 
       case "createConversationNameInValid":
-        return new Object[][]{{null}, {true}, {1}, {11.22}, {arr}};
+        return new Object[][] {{null}, {true}, {1}, {11.22}, {arr}};
 
       case "createConversationDisplayNameValid":
-        return new Object[][]{
-            {null}, {"  "},
+        return new Object[][] {
+          {null}, {"  "},
         };
       case "createConversationDisplayNameInvalid":
-
-        return new Object[][]{
-            {""}, {true}, {1}, {11.22}, {arr}
-        };
+        return new Object[][] {{""}, {true}, {1}, {11.22}, {arr}};
       case "createConversationImageUrlInValid":
-        return new Object[][]{{"  "}, {"test"}, {null}, {true}, {1}, {11.22}, {arr}};
+        return new Object[][] {{"  "}, {"test"}, {null}, {true}, {1}, {11.22}, {arr}};
       case "createConversationHttpMethodInValid":
-        return new Object[][]{{DELETE}, {PUT}, {PATCH}};
+        return new Object[][] {{DELETE}, {PUT}, {PATCH}};
       case "createConversationTTLValid":
-        return new Object[][]{{1.2323}, {0}, {"1"}, {"1000000000000"}, {101.22}};
+        return new Object[][] {{1.2323}, {0}, {"1"}, {"1000000000000"}, {101.22}};
       case "createConversationTTLInvalid":
-        return new Object[][]{{-1}, {"10000000000000000"}, {null}, {"  "}, {""}};
+        return new Object[][] {{-1}, {"10000000000000000"}, {null}, {"  "}, {""}};
 
       default:
-        return new Object[][]{};
+        return new Object[][] {};
     }
-
-
   }
 }

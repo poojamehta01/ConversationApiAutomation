@@ -1,4 +1,4 @@
-package com.api.automation.pojos.response;
+package com.api.automation.pojos.response.conversation;
 
 import lombok.Data;
 import lombok.Getter;
