@@ -1,4 +1,4 @@
-package com.api.automation.pojos.response;
+package com.api.automation.pojos.response.conversation;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.ArrayList;
@@ -21,6 +21,7 @@ public class ErrorResponse {
     public ArrayList<String> properties;
     public ArrayList<String> ttl;
     public ArrayList<String> incorrectKey;
+    public ArrayList<String> conversation_id;
   }
 
   public String description;
