@@ -1,31 +1,29 @@
 package com.api.automation.conversation.createconversation;
 
-import static com.api.automation.constants.CommonConstants.APP_ID;
 import static com.api.automation.constants.CommonConstants.EXPIRED_TOKEN;
 import static com.api.automation.constants.CommonConstants.INVALID_TOKEN;
-import static com.api.automation.constants.CommonConstants.PRIVATE_KEY;
 import static com.api.automation.constants.conversation.CreateConversationConstants.DISPLAY_NAME;
 import static com.api.automation.constants.conversation.CreateConversationConstants.DUPLICATE_NAME;
 import static com.api.automation.constants.conversation.CreateConversationConstants.IMAGE_URL;
 import static com.api.automation.constants.conversation.CreateConversationConstants.NAME_ERROR;
 import static com.api.automation.constants.conversation.CreateConversationConstants.TTL;
-import static com.api.automation.enums.conversation.CreateConversationEnums.DATATYPE_INCORRECT;
-import static com.api.automation.enums.conversation.CreateConversationEnums.DUPLICATE_NAME_ERROR;
-import static com.api.automation.enums.conversation.CreateConversationEnums.EMPTY_DISPLAY_NAME;
-import static com.api.automation.enums.conversation.CreateConversationEnums.INCORRECT_HTTP_METHODS;
-import static com.api.automation.enums.conversation.CreateConversationEnums.INCORRECT_KEY;
-import static com.api.automation.enums.conversation.CreateConversationEnums.INCORRECT_URL;
-import static com.api.automation.enums.conversation.CreateConversationEnums.PROPERTY_DATATYPE_INCORRECT;
-import static com.api.automation.enums.conversation.CreateConversationEnums.TOKEN_EXPIRED_ERROR;
-import static com.api.automation.enums.conversation.CreateConversationEnums.TOKEN_INVALID_ERROR;
-import static com.api.automation.enums.conversation.CreateConversationEnums.TTL_DATATYPE_INCORRECT;
-import static com.api.automation.enums.conversation.CreateConversationEnums.TTL_LESS_THAN_ZERO;
-import static com.api.automation.enums.conversation.CreateConversationEnums.TTL_NOT_SAFE_NUM;
+import static com.api.automation.enums.conversation.CommonErrorEnums.DUPLICATE_NAME_ERROR;
+import static com.api.automation.enums.conversation.CommonErrorEnums.INCORRECT_HTTP_METHODS;
+import static com.api.automation.enums.conversation.CommonErrorEnums.TOKEN_EXPIRED_ERROR;
+import static com.api.automation.enums.conversation.CommonErrorEnums.TOKEN_INVALID_ERROR;
+import static com.api.automation.enums.conversation.InputValidationErrorEnums.DATATYPE_OTHER_THAN_INT;
+import static com.api.automation.enums.conversation.InputValidationErrorEnums.DATATYPE_OTHER_THAN_STRING;
+import static com.api.automation.enums.conversation.InputValidationErrorEnums.EMPTY_DISPLAY_NAME;
+import static com.api.automation.enums.conversation.InputValidationErrorEnums.GREATER_THAN_EQUAL_TO_ZERO;
+import static com.api.automation.enums.conversation.InputValidationErrorEnums.INCORRECT_KEY;
+import static com.api.automation.enums.conversation.InputValidationErrorEnums.INCORRECT_URL;
+import static com.api.automation.enums.conversation.InputValidationErrorEnums.PROPERTY_DATATYPE_INCORRECT;
+import static com.api.automation.enums.conversation.InputValidationErrorEnums.TTL_NOT_SAFE_NUM;
 import static com.api.automation.helpers.CommonTestHelper.randomRegex;
 import static io.restassured.http.Method.POST;
 
 import com.api.automation.BaseTest;
-import com.api.automation.enums.conversation.CreateConversationEnums;
+import com.api.automation.helpers.conversation.CommonConversationHelper;
 import com.api.automation.helpers.conversation.createconversation.CreateConversationApiHelper;
 import com.api.automation.helpers.conversation.createconversation.CreateConversationDataProviderHelper;
 import com.api.automation.pojos.requests.conversation.createconversation.CreateConversationRequest;
@@ -35,13 +33,11 @@ import com.api.automation.pojos.requests.conversation.createconversation.CreateC
 import com.api.automation.pojos.response.conversation.ErrorResponse;
 import com.api.automation.utils.ApiRequestBuilder;
 import com.api.automation.utils.RestAssuredUtils;
-import com.vonage.jwt.Jwt;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
-import java.nio.file.Paths;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -54,16 +50,11 @@ import org.testng.asserts.SoftAssert;
 public class CreateConversationNegativeTests extends BaseTest {
 
   private String jwtToken;
+  public CommonConversationHelper commonConversationHelper;
 
   @BeforeClass(alwaysRun = true)
   public void setup() {
-
-    jwtToken =
-        Jwt.builder()
-            .applicationId(APP_ID)
-            .privateKeyPath(Paths.get(PRIVATE_KEY))
-            .build()
-            .generate();
+    jwtToken = CommonConversationHelper.generateJwtToken();
   }
 
   @Test(
@@ -84,10 +75,10 @@ public class CreateConversationNegativeTests extends BaseTest {
     Response errorResponse = RestAssuredUtils.processApiRequest(createConversationBuilder);
     ErrorResponse response = errorResponse.as(ErrorResponse.class);
     SoftAssert softAssert = new SoftAssert();
-    assertValidationFail(response, DATATYPE_INCORRECT);
+    commonConversationHelper.assertInputValidationFail(response, DATATYPE_OTHER_THAN_STRING);
     softAssert.assertEquals(
         response.getError().getName().get(0),
-        DATATYPE_INCORRECT.getError().replace("$KEYNAME", "name"));
+        DATATYPE_OTHER_THAN_STRING.getError().replace("$KEYNAME", "name"));
     softAssert.assertAll();
   }
 
@@ -116,7 +107,7 @@ public class CreateConversationNegativeTests extends BaseTest {
         RestAssuredUtils.processApiRequest(createConversationBuilder);
     ErrorResponse response = createConversationResponse.as(ErrorResponse.class);
     SoftAssert softAssert = new SoftAssert();
-    assertValidationFail(response, DUPLICATE_NAME_ERROR);
+    commonConversationHelper.assertErrorValidation(response, DUPLICATE_NAME_ERROR);
     softAssert.assertAll();
   }
 
@@ -140,16 +131,16 @@ public class CreateConversationNegativeTests extends BaseTest {
     ErrorResponse response = createConversationResponse.as(ErrorResponse.class);
     SoftAssert softAssert = new SoftAssert();
     if (displayName == "") {
-      assertValidationFail(response, EMPTY_DISPLAY_NAME);
+      commonConversationHelper.assertInputValidationFail(response, EMPTY_DISPLAY_NAME);
       softAssert.assertEquals(
           response.getError().getDisplay_name().get(0),
           EMPTY_DISPLAY_NAME.getError().replace("$KEYNAME", "display_name"));
 
     } else {
-      assertValidationFail(response, DATATYPE_INCORRECT);
+      commonConversationHelper.assertInputValidationFail(response, DATATYPE_OTHER_THAN_STRING);
       softAssert.assertEquals(
           response.getError().getDisplay_name().get(0),
-          DATATYPE_INCORRECT.getError().replace("$KEYNAME", "display_name"));
+          DATATYPE_OTHER_THAN_STRING.getError().replace("$KEYNAME", "display_name"));
     }
     softAssert.assertAll();
   }
@@ -176,12 +167,12 @@ public class CreateConversationNegativeTests extends BaseTest {
     SoftAssert softAssert = new SoftAssert();
 
     if (imageUrl == null) {
-      assertValidationFail(response, DATATYPE_INCORRECT);
+      commonConversationHelper.assertInputValidationFail(response, DATATYPE_OTHER_THAN_STRING);
       softAssert.assertEquals(
           response.getError().getImage_url().get(0),
-          DATATYPE_INCORRECT.getError().replace("$KEYNAME", "image_url"));
+          DATATYPE_OTHER_THAN_STRING.getError().replace("$KEYNAME", "image_url"));
     } else {
-      assertValidationFail(response, INCORRECT_URL);
+      commonConversationHelper.assertInputValidationFail(response, INCORRECT_URL);
     }
     softAssert.assertAll();
   }
@@ -202,7 +193,7 @@ public class CreateConversationNegativeTests extends BaseTest {
         RestAssuredUtils.processApiRequest(createConversationBuilder);
     ErrorResponse response = createConversationResponse.as(ErrorResponse.class);
     SoftAssert softAssert = new SoftAssert();
-    assertValidationFail(response, PROPERTY_DATATYPE_INCORRECT);
+    commonConversationHelper.assertInputValidationFail(response, PROPERTY_DATATYPE_INCORRECT);
     softAssert.assertAll();
   }
 
@@ -224,7 +215,7 @@ public class CreateConversationNegativeTests extends BaseTest {
     SoftAssert softAssert = new SoftAssert();
     System.out.println("this is the response!!");
     System.out.println(response);
-    assertValidationFail(response, INCORRECT_KEY);
+    commonConversationHelper.assertInputValidationFail(response, INCORRECT_KEY);
     softAssert.assertEquals(
         response.getError().getIncorrectKey().get(0),
         INCORRECT_KEY.getError().replace("$KEYNAME", "incorrectKey"));
@@ -253,15 +244,24 @@ public class CreateConversationNegativeTests extends BaseTest {
     SoftAssert softAssert = new SoftAssert();
 
     if (ttl == null) {
-      assertValidationFail(response, TTL_DATATYPE_INCORRECT);
+      commonConversationHelper.assertInputValidationFail(response, DATATYPE_OTHER_THAN_INT);
+      softAssert.assertEquals(
+          response.getError().getTtl().get(0),
+          DATATYPE_OTHER_THAN_INT.getError().replace("$KEYNAME", "ttl"));
+
     } else if (ttl.equals(-1)) {
-      assertValidationFail(response, TTL_LESS_THAN_ZERO);
-      softAssert.assertEquals(response.getError().getTtl().get(0), TTL_LESS_THAN_ZERO.getError());
+      commonConversationHelper.assertInputValidationFail(response, GREATER_THAN_EQUAL_TO_ZERO);
+      softAssert.assertEquals(
+          response.getError().getTtl().get(0),
+          GREATER_THAN_EQUAL_TO_ZERO.getError().replace("$KEYNAME", "ttl"));
 
     } else if (ttl.equals("10000000000000000")) {
-      assertValidationFail(response, TTL_NOT_SAFE_NUM);
+      commonConversationHelper.assertInputValidationFail(response, TTL_NOT_SAFE_NUM);
     } else {
-      assertValidationFail(response, TTL_DATATYPE_INCORRECT);
+      commonConversationHelper.assertInputValidationFail(response, DATATYPE_OTHER_THAN_INT);
+      softAssert.assertEquals(
+          response.getError().getTtl().get(0),
+          DATATYPE_OTHER_THAN_INT.getError().replace("$KEYNAME", "ttl"));
     }
     softAssert.assertAll();
   }
@@ -285,7 +285,7 @@ public class CreateConversationNegativeTests extends BaseTest {
         RestAssuredUtils.processApiRequest(createConversationBuilder);
     ErrorResponse response = createConversationResponse.as(ErrorResponse.class);
     SoftAssert softAssert = new SoftAssert();
-    assertValidationFail(response, INCORRECT_HTTP_METHODS);
+    commonConversationHelper.assertErrorValidation(response, INCORRECT_HTTP_METHODS);
     softAssert.assertAll();
   }
 
@@ -305,7 +305,7 @@ public class CreateConversationNegativeTests extends BaseTest {
         RestAssuredUtils.processApiRequest(createConversationBuilder);
     ErrorResponse response = createConversationResponse.as(ErrorResponse.class);
     SoftAssert softAssert = new SoftAssert();
-    assertValidationFail(response, TOKEN_INVALID_ERROR);
+    commonConversationHelper.assertErrorValidation(response, TOKEN_INVALID_ERROR);
     softAssert.assertAll();
   }
 
@@ -325,13 +325,7 @@ public class CreateConversationNegativeTests extends BaseTest {
         RestAssuredUtils.processApiRequest(createConversationBuilder);
     ErrorResponse response = createConversationResponse.as(ErrorResponse.class);
     SoftAssert softAssert = new SoftAssert();
-    assertValidationFail(response, TOKEN_EXPIRED_ERROR);
+    commonConversationHelper.assertErrorValidation(response, TOKEN_EXPIRED_ERROR);
     softAssert.assertAll();
-  }
-
-  private void assertValidationFail(ErrorResponse response, CreateConversationEnums enums) {
-    SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals(response.getDescription(), enums.getDescription());
-    softAssert.assertEquals(response.getCode(), enums.getCode());
   }
 }

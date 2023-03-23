@@ -29,7 +29,6 @@ public class CreateConversationApiHelper {
       int expectedStatusCode,
       CreateConversationRequest createConversationRequest,
       String jwtToken) {
-    System.out.println(BASE_URL);
     return ApiRequestBuilder.builder()
         .requestMethod(methodType)
         .requestHeaders(getHeaders(jwtToken))
@@ -44,7 +43,6 @@ public class CreateConversationApiHelper {
       int expectedStatusCode,
       CreateConversationRequestIncorrectKey createConversationRequestIncorrectKey,
       String jwtToken) {
-    System.out.println(BASE_URL);
     return ApiRequestBuilder.builder()
         .requestMethod(methodType)
         .requestHeaders(getHeaders(jwtToken))
@@ -56,7 +54,6 @@ public class CreateConversationApiHelper {
 
   public static ApiRequestBuilder createConversationBuilder(
       Method methodType, int expectedStatusCode, String jwtToken) {
-    System.out.println(BASE_URL);
     return ApiRequestBuilder.builder()
         .requestMethod(methodType)
         .requestHeaders(getHeaders(jwtToken))

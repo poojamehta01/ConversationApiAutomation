@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GetConversationApiResponse {
+public class GetConversationResponse {
 
   public String uuid;
   public String name;

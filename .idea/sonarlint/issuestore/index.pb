@@ -16,5 +16,3 @@ k
 .src/test/java/com/api/automation/BaseTest.java,3/2/32b895e3ea5d4d1613cf17c72db6caac75b78d66
 x
 Hsrc/main/java/com/api/automation/constants/ConversationApiConstants.java,7/3/739cdce47117cc1c4bf3230fadc98e323b452c41
-w
-Gsrc/test/java/com/api/automation/conversation/e2econversationTests.java,4/0/40219855e1034ffb87442b8363dc3215179a5a52

@@ -1,4 +1,4 @@
-package com.api.automation.conversation;
+package com.api.automation.conversation.listconversationTests;
 
 import static com.api.automation.constants.conversation.CreateConversationConstants.HREF;
 import static io.restassured.http.Method.GET;
@@ -44,10 +44,7 @@ public class ListConversationPositiveTests {
 
     Response listConversationResponse = RestAssuredUtils.processApiRequest(listConversationBuilder);
     ListConversationResponse response = listConversationResponse.as(ListConversationResponse.class);
-    softAssert.assertEquals(response.getPage_size(), 10);
-    softAssert.assertEquals(response.getRecord_index(), 0);
-    softAssert.assertNotNull(response.get_embedded().getConversations());
-    softAssert.assertAll();
+    assertPositiveValidation(response, 10, 0);
   }
 
   @Test(description = "PC-List conversation with startDate filter")
@@ -60,10 +57,7 @@ public class ListConversationPositiveTests {
         ListConversationApiHelper.listConversationBuilder(GET, 200, jwtToken, queryParams);
     Response listConversationResponse = RestAssuredUtils.processApiRequest(listConversationBuilder);
     ListConversationResponse response = listConversationResponse.as(ListConversationResponse.class);
-    softAssert.assertEquals(response.getPage_size(), 10);
-    softAssert.assertEquals(response.getRecord_index(), 0);
-    softAssert.assertNotNull(response.get_embedded().getConversations());
-    softAssert.assertAll();
+    assertPositiveValidation(response, 10, 0);
   }
 
   @Test(description = "PC-List conversation with endDate filter")
@@ -76,10 +70,7 @@ public class ListConversationPositiveTests {
         ListConversationApiHelper.listConversationBuilder(GET, 200, jwtToken, queryParams);
     Response listConversationResponse = RestAssuredUtils.processApiRequest(listConversationBuilder);
     ListConversationResponse response = listConversationResponse.as(ListConversationResponse.class);
-    softAssert.assertEquals(response.getPage_size(), 10);
-    softAssert.assertNotNull(response.get_embedded().getConversations());
-    softAssert.assertEquals(response.getRecord_index(), 0);
-    softAssert.assertAll();
+    assertPositiveValidation(response, 10, 0);
   }
 
   @DataProvider(name = "listConversationPageValidDataProvider")
@@ -99,10 +90,7 @@ public class ListConversationPositiveTests {
         ListConversationApiHelper.listConversationBuilder(GET, 200, jwtToken, queryParams);
     Response listConversationResponse = RestAssuredUtils.processApiRequest(listConversationBuilder);
     ListConversationResponse response = listConversationResponse.as(ListConversationResponse.class);
-    softAssert.assertEquals(response.getPage_size(), pageSize);
-    softAssert.assertEquals(response.getRecord_index(), 0);
-    softAssert.assertNotNull(response.get_embedded().getConversations());
-    softAssert.assertAll();
+    assertPositiveValidation(response, pageSize, 0);
   }
 
   @DataProvider(name = "listConversationFilterRecordValid")
@@ -123,7 +111,6 @@ public class ListConversationPositiveTests {
     Response listConversationResponse = RestAssuredUtils.processApiRequest(listConversationBuilder);
     ListConversationResponse response = listConversationResponse.as(ListConversationResponse.class);
     assertPositiveValidation(response, 10, recordIndex);
-    softAssert.assertAll();
   }
 
   @DataProvider(name = "listConversationFilterByOrderValid")
@@ -143,7 +130,6 @@ public class ListConversationPositiveTests {
     Response listConversationResponse = RestAssuredUtils.processApiRequest(listConversationBuilder);
     ListConversationResponse response = listConversationResponse.as(ListConversationResponse.class);
     assertPositiveValidation(response, 10, 0);
-    softAssert.assertAll();
   }
 
   @Test(description = "PC-List conversation with all valid filter")
@@ -161,7 +147,6 @@ public class ListConversationPositiveTests {
     ListConversationResponse response = listConversationResponse.as(ListConversationResponse.class);
     assertPositiveValidation(
         response, queryParams.get("page_size"), queryParams.get("record_index"));
-    softAssert.assertAll();
   }
 
   public void assertPositiveValidation(

@@ -1,7 +1,5 @@
 package com.api.automation.conversation.createconversation;
 
-import static com.api.automation.constants.CommonConstants.APP_ID;
-import static com.api.automation.constants.CommonConstants.PRIVATE_KEY;
 import static com.api.automation.constants.conversation.CreateConversationConstants.DISPLAY_NAME;
 import static com.api.automation.constants.conversation.CreateConversationConstants.HREF;
 import static com.api.automation.constants.conversation.CreateConversationConstants.IMAGE_URL;
@@ -10,6 +8,7 @@ import static com.api.automation.helpers.CommonTestHelper.randomRegex;
 import static io.restassured.http.Method.POST;
 
 import com.api.automation.BaseTest;
+import com.api.automation.helpers.conversation.CommonConversationHelper;
 import com.api.automation.helpers.conversation.createconversation.CreateConversationApiHelper;
 import com.api.automation.helpers.conversation.createconversation.CreateConversationDataProviderHelper;
 import com.api.automation.pojos.requests.conversation.createconversation.CreateConversationRequest;
@@ -17,12 +16,10 @@ import com.api.automation.pojos.requests.conversation.createconversation.CreateC
 import com.api.automation.pojos.response.conversation.CreateConversationResponse;
 import com.api.automation.utils.ApiRequestBuilder;
 import com.api.automation.utils.RestAssuredUtils;
-import com.vonage.jwt.Jwt;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import io.restassured.response.Response;
-import java.nio.file.Paths;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -38,13 +35,7 @@ public class CreateConversationPositiveTests extends BaseTest {
 
   @BeforeClass(alwaysRun = true)
   public void setup() {
-
-    jwtToken =
-        Jwt.builder()
-            .applicationId(APP_ID)
-            .privateKeyPath(Paths.get(PRIVATE_KEY))
-            .build()
-            .generate();
+    jwtToken = CommonConversationHelper.generateJwtToken();
   }
 
   @Test(description = "PC-create Conversation with name,display,imageUrl,properties")

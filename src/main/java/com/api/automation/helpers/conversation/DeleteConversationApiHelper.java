@@ -18,7 +18,6 @@ public class DeleteConversationApiHelper {
 
   public static ApiRequestBuilder deleteConversationBuilder(
       Method methodType, int expectedStatusCode, String jwtToken, Object conversationId) {
-    System.out.println(BASE_URL);
     return ApiRequestBuilder.builder()
         .requestMethod(methodType)
         .requestHeaders(getHeaders(jwtToken))

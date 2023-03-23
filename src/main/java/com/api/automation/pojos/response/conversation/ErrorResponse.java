@@ -22,6 +22,11 @@ public class ErrorResponse {
     public ArrayList<String> ttl;
     public ArrayList<String> incorrectKey;
     public ArrayList<String> conversation_id;
+    public ArrayList<String> page_size;
+    public ArrayList<String> date_start;
+    public ArrayList<String> date_end;
+    public ArrayList<String> record_index;
+    public ArrayList<String> order;
   }
 
   public String description;
